@@ -1,63 +1,63 @@
 ﻿using System.Linq;
-using UnityEngine;
 
-// Provides input signal (0 or 1) to a chip.
-// When designing a chip, this input signal can be manually set to 0 or 1 by the player.
-public class InputSignal : ChipSignal
+namespace Assets.Scripts.Chip
 {
-
-
-    protected override void Start()
+    // Provides input signal (0 or 1) to a chip.
+    // When designing a chip, this input signal can be manually set to 0 or 1 by the player.
+    public class InputSignal : ChipSignal
     {
-        base.Start();
-        SetCol();
-    }
+        protected override void Start()
+        {
+            base.Start();
+            SetCol();
+        }
 
-    public void ToggleActive()
-    {
-        currentState = 1 - currentState;
-        SetCol();
-    }
+        public void ToggleActive()
+        {
+            CurrentState = 1 - CurrentState;
+            SetCol();
+        }
 
-    public void SetState(int state)
-    {
-        currentState = state >= 1 ? 1 : 0;
-        SetCol();
-    }
+        public void SetState(int state)
+        {
+            CurrentState = state >= 1 ? 1 : 0;
+            SetCol();
+        }
 
-    public void SendSignal(int signal)
-    {
-        currentState = signal;
-        outputPins[0].ReceiveSignal(signal);
-        SetCol();
-    }
+        public void SendSignal(int signal)
+        {
+            CurrentState = signal;
+            OutputPins[0].ReceiveSignal(signal);
+            SetCol();
+        }
 
-    public void SendOffSignal()
-    {
-        outputPins[0].ReceiveSignal(0);
-        SetCol();
-    }
+        public void SendOffSignal()
+        {
+            OutputPins[0].ReceiveSignal(0);
+            SetCol();
+        }
 
-    public void SendSignal()
-    {
-        outputPins[0].ReceiveSignal(currentState);
-    }
+        public void SendSignal()
+        {
+            OutputPins[0].ReceiveSignal(CurrentState);
+        }
 
-    void SetCol()
-    {
-        SetDisplayState(currentState);
-    }
+        void SetCol()
+        {
+            SetDisplayState(CurrentState);
+        }
 
-    public override void UpdateSignalName(string newName)
-    {
-        base.UpdateSignalName(newName);
-        outputPins[0].pinName = newName;
-    }
+        public override void UpdateSignalName(string newName)
+        {
+            base.UpdateSignalName(newName);
+            OutputPins[0].PinName = newName;
+        }
 
-    void OnMouseDown()
-    {
-        // Allow only to click on single wires, not on bus wires
-        if (outputPins.All(x => x.wireType == Pin.WireType.Simple))
-            ToggleActive();
+        private void OnMouseDown()
+        {
+            // Allow only to click on single wires, not on bus wires
+            if (OutputPins.All(x => x.WType == Pin.WireType.Simple))
+                ToggleActive();
+        }
     }
 }

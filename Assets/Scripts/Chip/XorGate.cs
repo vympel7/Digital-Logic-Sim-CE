@@ -1,17 +1,19 @@
 using UnityEngine;
 
-public class XorGate : BuiltinChip
+namespace Assets.Scripts.Chip
 {
-
-    protected override void Awake()
+    public class XorGate : BuiltinChip
     {
-        base.Awake();
-    }
 
-    protected override void ProcessOutput()
-    {
-        int outputSignal = inputPins[0].State ^ inputPins[1].State;
-        outputPins[0].ReceiveSignal(outputSignal);
-    }
+        protected override void Awake()
+        {
+            base.Awake();
+        }
 
+        protected override void ProcessOutput()
+        {
+            OutputPins[0].ReceiveSignal(InputPins[0].State ^ InputPins[1].State);
+        }
+
+    }
 }

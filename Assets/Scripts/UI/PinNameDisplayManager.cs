@@ -2,113 +2,118 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PinNameDisplayManager : MonoBehaviour
+namespace Assets.Scripts.UI
 {
+    using Scripts.Chip;
+    using Scripts.Graphics;
 
-    public PinNameDisplay pinNamePrefab;
-    ChipEditor chipEditor;
-    ChipEditorOptions editorDisplayOptions;
-    Pin highlightedPin;
-
-    [HideInInspector]
-    public List<PinNameDisplay> pinNameDisplays;
-    List<Pin> pinsToDisplay;
-
-    void Awake()
+    public class PinNameDisplayManager : MonoBehaviour
     {
-        chipEditor = FindObjectOfType<ChipEditor>();
-        editorDisplayOptions = FindObjectOfType<ChipEditorOptions>();
-        chipEditor.pinAndWireInteraction.onMouseOverPin += OnMouseOverPin;
-        chipEditor.pinAndWireInteraction.onMouseExitPin += OnMouseExitPin;
+        public PinNameDisplay pinNamePrefab;
+        ChipEditor chipEditor;
+        ChipEditorOptions editorDisplayOptions;
+        Pin highlightedPin;
 
-        pinNameDisplays = new List<PinNameDisplay>();
-        pinsToDisplay = new List<Pin>();
-    }
+        [HideInInspector]
+        public List<PinNameDisplay> pinNameDisplays;
+        List<Pin> pinsToDisplay;
 
-    public void UpdateTextSize(float fontSize)
-    {
-        foreach (PinNameDisplay display in pinNameDisplays)
-            display.nameUI.fontSize = fontSize;
-    }
-
-    void LateUpdate()
-    {
-        var mode = editorDisplayOptions.activePinNameDisplayMode;
-        pinsToDisplay.Clear();
-
-        if (mode == ChipEditorOptions.PinNameDisplayMode.AlwaysMain ||
-            mode == ChipEditorOptions.PinNameDisplayMode.AlwaysAll)
+        void Awake()
         {
-            if (mode == ChipEditorOptions.PinNameDisplayMode.AlwaysAll)
+            chipEditor = FindObjectOfType<ChipEditor>();
+            editorDisplayOptions = FindObjectOfType<ChipEditorOptions>();
+            chipEditor.PinAndWireInteraction.onMouseOverPin += OnMouseOverPin;
+            chipEditor.PinAndWireInteraction.onMouseExitPin += OnMouseExitPin;
+
+            pinNameDisplays = new List<PinNameDisplay>();
+            pinsToDisplay = new List<Pin>();
+        }
+
+        public void UpdateTextSize(float fontSize)
+        {
+            foreach (PinNameDisplay display in pinNameDisplays)
+                display.NameUI.fontSize = fontSize;
+        }
+
+        void LateUpdate()
+        {
+            var mode = editorDisplayOptions.ActivePinNameDisplayMode;
+            pinsToDisplay.Clear();
+
+            if (mode == ChipEditorOptions.PinNameDisplayMode.AlwaysMain ||
+                mode == ChipEditorOptions.PinNameDisplayMode.AlwaysAll)
             {
-                foreach (var chip in chipEditor.chipInteraction.allChips)
+                if (mode == ChipEditorOptions.PinNameDisplayMode.AlwaysAll)
                 {
-                    pinsToDisplay.AddRange(chip.inputPins);
-                    pinsToDisplay.AddRange(chip.outputPins);
+                    foreach (var chip in chipEditor.ChipInteraction.AllChips)
+                    {
+                        pinsToDisplay.AddRange(chip.InputPins);
+                        pinsToDisplay.AddRange(chip.OutputPins);
+                    }
+                }
+                foreach (var chip in chipEditor.InputsEditor.Signals)
+                {
+                    if (!chipEditor.InputsEditor.SelectedSignals.Contains(chip))
+                    {
+                        pinsToDisplay.AddRange(chip.OutputPins);
+                    }
+                }
+                foreach (var chip in chipEditor.OutputsEditor.Signals)
+                {
+                    if (!chipEditor.OutputsEditor.SelectedSignals.Contains(chip))
+                    {
+                        pinsToDisplay.AddRange(chip.InputPins);
+                    }
                 }
             }
-            foreach (var chip in chipEditor.inputsEditor.signals)
+
+            if (highlightedPin)
             {
-                if (!chipEditor.inputsEditor.selectedSignals.Contains(chip))
+                bool nameDisplayKey =
+                    Interaction.InputHelper.AnyOfTheseKeysHeld(KeyCode.LeftAlt, KeyCode.RightAlt);
+                if (nameDisplayKey ||
+                    mode == ChipEditorOptions.PinNameDisplayMode.Hover)
                 {
-                    pinsToDisplay.AddRange(chip.outputPins);
+                    pinsToDisplay.Add(highlightedPin);
                 }
             }
-            foreach (var chip in chipEditor.outputsEditor.signals)
+
+            DisplayPinName(pinsToDisplay);
+        }
+
+        public void DisplayPinName(List<Pin> pins)
+        {
+            if (pinNameDisplays.Count < pins.Count)
             {
-                if (!chipEditor.outputsEditor.selectedSignals.Contains(chip))
+                int numToAdd = pins.Count - pinNameDisplays.Count;
+                for (int i = 0; i < numToAdd; i++)
                 {
-                    pinsToDisplay.AddRange(chip.inputPins);
+                    pinNameDisplays.Add(Instantiate(pinNamePrefab, parent: transform));
                 }
             }
-        }
-
-        if (highlightedPin)
-        {
-            bool nameDisplayKey =
-                InputHelper.AnyOfTheseKeysHeld(KeyCode.LeftAlt, KeyCode.RightAlt);
-            if (nameDisplayKey ||
-                mode == ChipEditorOptions.PinNameDisplayMode.Hover)
+            else if (pinNameDisplays.Count > pins.Count)
             {
-                pinsToDisplay.Add(highlightedPin);
+                for (int i = pins.Count; i < pinNameDisplays.Count; i++)
+                {
+                    pinNameDisplays[i].gameObject.SetActive(false);
+                }
+            }
+
+            for (int i = 0; i < pins.Count; i++)
+            {
+                pinNameDisplays[i].gameObject.SetActive(true);
+                pinNameDisplays[i].Set(pins[i]);
             }
         }
 
-        DisplayPinName(pinsToDisplay);
-    }
+        void OnMouseOverPin(Pin pin) { highlightedPin = pin; }
 
-    public void DisplayPinName(List<Pin> pins)
-    {
-        if (pinNameDisplays.Count < pins.Count)
+        void OnMouseExitPin(Pin pin)
         {
-            int numToAdd = pins.Count - pinNameDisplays.Count;
-            for (int i = 0; i < numToAdd; i++)
+            if (highlightedPin == pin)
             {
-                pinNameDisplays.Add(Instantiate(pinNamePrefab, parent: transform));
+                highlightedPin = null;
             }
-        }
-        else if (pinNameDisplays.Count > pins.Count)
-        {
-            for (int i = pins.Count; i < pinNameDisplays.Count; i++)
-            {
-                pinNameDisplays[i].gameObject.SetActive(false);
-            }
-        }
-
-        for (int i = 0; i < pins.Count; i++)
-        {
-            pinNameDisplays[i].gameObject.SetActive(true);
-            pinNameDisplays[i].Set(pins[i]);
-        }
-    }
-
-    void OnMouseOverPin(Pin pin) { highlightedPin = pin; }
-
-    void OnMouseExitPin(Pin pin)
-    {
-        if (highlightedPin == pin)
-        {
-            highlightedPin = null;
         }
     }
 }

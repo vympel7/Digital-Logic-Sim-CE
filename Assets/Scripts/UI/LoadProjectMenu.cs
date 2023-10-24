@@ -1,34 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadProjectMenu : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public Button projectButtonPrefab;
-    public Transform scrollHolder;
-    [SerializeField, HideInInspector]
-    List<Button> loadButtons;
-
-    void OnEnable()
+    public class LoadProjectMenu : MonoBehaviour
     {
-        string[] projectNames = SaveSystem.GetSaveNames();
+        public Button ProjectButtonPrefab;
+        public Transform ScrollHolder;
+        [SerializeField, HideInInspector]
+        private List<Button> _loadButtons;
 
-        for (int i = 0; i < projectNames.Length; i++)
+        private void OnEnable()
         {
-            string projectName = projectNames[i];
-            if (i >= loadButtons.Count)
-                loadButtons.Add(Instantiate(projectButtonPrefab, parent: scrollHolder));
-            Button loadButton = loadButtons[i];
-            loadButton.GetComponentInChildren<TMPro.TMP_Text>().text =
-                projectName.Trim();
-            loadButton.onClick.AddListener(() => LoadProject(projectName));
-        }
-    }
+            string[] projectNames = SaveSystem.SaveSystem.GetSaveNames();
 
-    public void LoadProject(string projectName)
-    {
-        SaveSystem.SetActiveProject(projectName);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            for (int i = 0; i < projectNames.Length; i++)
+            {
+                string projectName = projectNames[i];
+                if (i >= _loadButtons.Count)
+                    _loadButtons.Add(Instantiate(ProjectButtonPrefab, parent: ScrollHolder));
+                Button loadButton = _loadButtons[i];
+                loadButton.GetComponentInChildren<TMPro.TMP_Text>().text =
+                    projectName.Trim();
+                loadButton.onClick.AddListener(() => LoadProject(projectName));
+            }
+        }
+
+        public void LoadProject(string projectName)
+        {
+            SaveSystem.SaveSystem.SetActiveProject(projectName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
     }
 }

@@ -1,64 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EditFolderMenu : MonoBehaviour
+namespace Assets.Scripts.UI.Menu
 {
-    ChipBarUI chipBarUI;
-    public TMP_InputField RenamingFolderField;
-    public TMP_Text RenamingTextLabel;
-    public Button OKRenameFolder;
-    private string FolderName = "";
+    using Scripts.FolderSystem;
 
-    private void Start()
+    public class EditFolderMenu : MonoBehaviour
     {
-        chipBarUI = ChipBarUI.instance;
-    }
+        private ChipBarUI _chipBarUI;
+        public TMP_InputField RenamingFolderField;
+        public TMP_Text RenamingTextLabel;
+        public Button OKRenameFolder;
+        private string _folderName = "";
 
-    public void RenameFolder()
-    {
-        string newFolderName = RenamingFolderField.text;
-        RenamingFolderField.SetTextWithoutNotify("");
-        OKRenameFolder.interactable = false;
+        private void Start()
+        {
+            _chipBarUI = ChipBarUI.Instance;
+        }
 
-        FolderSystem.RenameFolder(FolderName, newFolderName);
-        chipBarUI.NotifyFolderNameChanged();
-    }
+        public void RenameFolder()
+        {
+            string newFolderName = RenamingFolderField.text;
+            RenamingFolderField.SetTextWithoutNotify("");
+            OKRenameFolder.interactable = false;
 
-    public void SubmitDeleteFolder()
-    {
-        UIManager.NewSubmitMenu(header: "Delete Folder",
-                        text: "Are you sure you want to delete the folder '" +
-                            FolderName +
-                            "'?\nIt will be lost forever!",
-                        onSubmit: DeleteFolder);
+            FolderSystem.RenameFolder(_folderName, newFolderName);
+            _chipBarUI.NotifyFolderNameChanged();
+        }
 
-    }
+        public void SubmitDeleteFolder()
+        {
+            UIManager.NewSubmitMenu(header: "Delete Folder",
+                            text: "Are you sure you want to delete the folder '" +
+                                _folderName +
+                                "'?\nIt will be lost forever!",
+                            onSubmit: DeleteFolder);
 
-    public void DeleteFolder()
-    {
-        FolderSystem.DeleteFolder(FolderName);
-        chipBarUI.NotifyRemovedFolder(FolderName);
-    }
+        }
 
-    public void InitMenu(string name) // call from Editor
-    {
-        FolderName = name;
-        RenamingTextLabel.text = name;
-        RenamingFolderField.Select();
-    }
+        public void DeleteFolder()
+        {
+            FolderSystem.DeleteFolder(_folderName);
+            _chipBarUI.NotifyRemovedFolder(_folderName);
+        }
 
-    public void CheckFolderName(bool endEdit = false)
-    {
-        var validName = FolderNameValidator.ValidateFolderName(RenamingFolderField.text, endEdit);
+        public void InitMenu(string name) // call from Editor
+        {
+            _folderName = name;
+            RenamingTextLabel.text = name;
+            RenamingFolderField.Select();
+        }
 
-        OKRenameFolder.interactable = validName.Length > 0 && FolderSystem.FolderNameAvailable(validName);
-        RenamingFolderField.SetTextWithoutNotify(validName);
+        public void CheckFolderName(bool endEdit = false)
+        {
+            var validName = FolderNameValidator.ValidateFolderName(RenamingFolderField.text, endEdit);
+
+            OKRenameFolder.interactable = validName.Length > 0 && FolderSystem.FolderNameAvailable(validName);
+            RenamingFolderField.SetTextWithoutNotify(validName);
+        }
     }
 }
-
-
-
-

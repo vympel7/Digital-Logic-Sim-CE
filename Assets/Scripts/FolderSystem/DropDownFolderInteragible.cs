@@ -1,34 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
-public class DropDownFolderInteragible : MonoBehaviour
+namespace Assets.Scripts.FolderSystem
 {
+    using Scripts.UI;
 
-    public UnityEvent<string> OnRightClick;
-
-    public void RightClickHandler()
+    public class DropDownFolderInteragible : MonoBehaviour
     {
-        FindObjectOfType<EditFolderMenu>().name = gameObject.name.Split(":")[1].Trim();
-    }
+        public UnityEvent<string> OnRightClick;
 
-    private void OnMouseOver()
-    {
-        if (Input.GetMouseButtonDown(1))
+        public void RightClickHandler()
         {
-            string FolderName = name.Split(":")[1].Trim();
-            if (FolderSystem.ReverseIndex(FolderName) > 2)
+            FindObjectOfType<UI.Menu.EditFolderMenu>().name = gameObject.name.Split(":")[1].Trim();
+        }
+
+        private void OnMouseOver()
+        {
+            if (Input.GetMouseButtonDown(1))
             {
-                UIManager.instance.OpenMenu(MenuType.EditFolderMenu);
-                OnRightClick?.Invoke(FolderName);
+                string FolderName = name.Split(":")[1].Trim();
+                if (FolderSystem.ReverseIndex(FolderName) > 2)
+                {
+                    UIManager.Instance.OpenMenu(MenuType.EditFolderMenu);
+                    OnRightClick?.Invoke(FolderName);
+                }
             }
         }
     }
-
-
-
-
 }
-

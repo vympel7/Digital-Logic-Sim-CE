@@ -2,49 +2,52 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBar : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public static ProgressBar instance;
-    public GameObject loadingScreen;
-    public Slider progressBar;
-    public Image fill;
-    public TMP_Text titleText;
-    public TMP_Text infoText;
-    public TMP_Text indicatorText;
-
-    public Color[] suggestedColours;
-
-    void Awake() { instance = this; }
-
-    public static ProgressBar New(string title = "Loading...", bool wholeNumbers = false)
+    public class ProgressBar : MonoBehaviour
     {
-        int suggestedColourIndex =
-            Random.Range(0, instance.suggestedColours.Length);
-        Color randomColor = instance.suggestedColours[suggestedColourIndex];
-        randomColor.a = 1;
-        instance.fill.color = randomColor;
-        instance.progressBar.wholeNumbers = wholeNumbers;
+        public static ProgressBar Instance;
+        public GameObject LoadingScreen;
+        public Slider ProgBar;
+        public Image Fill;
+        public TMP_Text TitleText;
+        public TMP_Text InfoText;
+        public TMP_Text IndicatorText;
 
-        instance.infoText.text = "Start Loading...";
-        instance.titleText.text = title;
-        instance.loadingScreen.SetActive(true);
-        return instance;
-    }
+        public Color[] SuggestedColours;
 
-    public void Open(float minValue, float maxValue)
-    {
-        progressBar.minValue = minValue;
-        progressBar.maxValue = maxValue;
-        loadingScreen.SetActive(true);
-    }
+        private void Awake() { Instance = this; }
 
-    public void Close() { loadingScreen.SetActive(false); }
+        public static ProgressBar New(string title = "Loading...", bool wholeNumbers = false)
+        {
+            int suggestedColourIndex =
+                Random.Range(0, Instance.SuggestedColours.Length);
+            Color randomColor = Instance.SuggestedColours[suggestedColourIndex];
+            randomColor.a = 1;
+            Instance.Fill.color = randomColor;
+            Instance.ProgBar.wholeNumbers = wholeNumbers;
 
-    public void SetValue(float value, string info = "")
-    {
-        infoText.text = info;
-        indicatorText.text =
-            value.ToString() + "/" + progressBar.maxValue.ToString();
-        progressBar.value = value;
+            Instance.InfoText.text = "Start Loading...";
+            Instance.TitleText.text = title;
+            Instance.LoadingScreen.SetActive(true);
+            return Instance;
+        }
+
+        public void Open(float minValue, float maxValue)
+        {
+            ProgBar.minValue = minValue;
+            ProgBar.maxValue = maxValue;
+            LoadingScreen.SetActive(true);
+        }
+
+        public void Close() { LoadingScreen.SetActive(false); }
+
+        public void SetValue(float value, string info = "")
+        {
+            InfoText.text = info;
+            IndicatorText.text =
+                value.ToString() + "/" + ProgBar.maxValue.ToString();
+            ProgBar.value = value;
+        }
     }
 }

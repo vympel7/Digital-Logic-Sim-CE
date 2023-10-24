@@ -1,26 +1,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RunButton : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public Button button;
-    public Simulation sim;
-    public Color onCol;
-    public Color offCol;
-
-    void Start() { button.targetGraphic.color = sim.active ? onCol : offCol; }
-
-    public void ToggleSimulationActive()
+    public class RunButton : MonoBehaviour
     {
-        sim.ToogleActive();
-        button.targetGraphic.color = sim.active ? onCol : offCol;
-    }
+        public Button Button;
+        public Core.Simulation Sim;
+        public Color OnCol;
+        public Color OffCol;
 
-    public void SetOff() { button.targetGraphic.color = offCol; }
+        void Start() { Button.targetGraphic.color = Sim.Active ? OnCol : OffCol; }
 
-    void OnValidate()
-    {
-        if (button == null)
-            button = GetComponent<Button>();
+        public void ToggleSimulationActive()
+        {
+            Sim.ToogleActive();
+            Button.targetGraphic.color = Sim.Active ? OnCol : OffCol;
+        }
+
+        public void SetOff() { Button.targetGraphic.color = OffCol; }
+
+        private void OnValidate()
+        {
+            if (Button == null)
+                Button = GetComponent<Button>();
+        }
     }
 }

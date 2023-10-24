@@ -1,134 +1,139 @@
 using UnityEngine;
 
-public class ScalingManager : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    public static ScalingManager instance;
+    using Scripts.Chip;
 
-    public static float scale = 1f;
-
-    const float maxPinSize = 0.4f;
-    const float minPinSize = 0.1f;
-    public static float pinSize = 0.4f;
-    public static float handleSizeY = 0.4f;
-
-    const float maxFontSize = 1.75f;
-    const float minFontSize = 0.3f;
-    public static float fontSize = 1.75f;
-
-    const float maxPinDisplayFontSize = 1.75f;
-    const float minPinDisplayFontSize = 0.3f;
-    public static float pinDisplayFontSize = 1.75f;
-
-    const float maxPackageFontSize = 2.5f;
-    const float minPackageFontSize = 0.5f;
-    public static float packageFontSize = 2.5f;
-
-    const float maxChipInteractionBoundsBorder = 0.25f;
-    const float minChipInteractionBoundsBorder = 0.05f;
-    public static float chipInteractionBoundsBorder = 0.25f;
-
-    const float maxChipStackSpace = 0.15f;
-    const float minChipStackSpace = 0.05f;
-    public static float chipStackSpace = 0.15f;
-
-    const float maxWireThickness = 0.5f;
-    const float minWireThickness = 0.1f;
-    public static float wireThickness = 0.5f;
-    public static float wireSelectedThickness = 0.5f;
-
-    const float maxPinDisplayPadding = 0.1f;
-    const float minPinDisplayPadding = 0.02f;
-    public static float pinDisplayPadding = 0.1f;
-
-    const float maxPinDisplayTextOffset = 0f;
-    const float minPinDisplayTextOffset = -0.005f;
-    public static float pinDisplayTextOffset = 0f;
-
-    const float maxIOBarDistance = 8.15f;
-    const float minIOBarDistance = 7.85f;
-    public static float ioBarDistance = 8.15f;
-
-    const float maxIOBarGraphicWidth = 1f;
-    const float minIOBarGraphicWidth = 0.5f;
-    public static float ioBarGraphicWidth = 1f;
-
-    const float maxGroupSpacing = 0.22f;
-    const float minGroupSpacing = 0.055f;
-    public static float groupSpacing = 0.22f;
-
-    const float maxPropertiesUIX = 1.45f;
-    const float minPropertiesUIX = 1.1f;
-    public static float propertiesUIX = 1.45f;
-
-    const float maxPropertiesUIXZoom = 0.8f;
-    const float minPropertiesUIXZoom = 0;
-    float propertiesUIXZoom = 0f;
-
-    void Awake() { instance = this; }
-
-    void Update()
+    public class ScalingManager : MonoBehaviour
     {
-        propertiesUIXZoom = Mathf.Lerp(minPropertiesUIXZoom, maxPropertiesUIXZoom,
-                                       ZoomManager.zoom);
-        propertiesUIX = Mathf.Lerp(minPropertiesUIX, maxPropertiesUIX, scale) -
-                        propertiesUIXZoom;
-    }
+        public static ScalingManager Instance;
 
-    static void CalcValues()
-    {
-        scale = Mathf.Clamp01(scale);
+        public static float Scale = 1f;
 
-        pinSize = Mathf.Lerp(minPinSize, maxPinSize, scale);
-        fontSize = Mathf.Lerp(minFontSize, maxFontSize, scale);
-        chipInteractionBoundsBorder = Mathf.Lerp(
-            minChipInteractionBoundsBorder, maxChipInteractionBoundsBorder, scale);
-        chipStackSpace = Mathf.Lerp(minChipStackSpace, maxChipStackSpace, scale);
-        pinDisplayPadding =
-            Mathf.Lerp(minPinDisplayPadding, maxPinDisplayPadding, scale);
-        pinDisplayTextOffset =
-            Mathf.Lerp(minPinDisplayTextOffset, maxPinDisplayTextOffset, scale);
-        ioBarDistance = Mathf.Lerp(minIOBarDistance, maxIOBarDistance, scale);
-        ioBarGraphicWidth =
-            Mathf.Lerp(minIOBarGraphicWidth, maxIOBarGraphicWidth, scale);
-        groupSpacing = Mathf.Lerp(minGroupSpacing, maxGroupSpacing, scale);
+        private const float _maxPinSize = 0.4f;
+        private const float _minPinSize = 0.1f;
+        public static float PinSize = 0.4f;
+        public static float HandleSizeY = 0.4f;
 
-        pinDisplayFontSize =
-            Mathf.Clamp(fontSize, minPinDisplayFontSize, maxPinDisplayFontSize);
-        packageFontSize =
-            Mathf.Clamp(fontSize * 1.5f, minPackageFontSize, maxPackageFontSize);
-        wireThickness =
-            Mathf.Clamp(pinSize * 1.5f, minWireThickness, maxWireThickness);
-        wireSelectedThickness = wireThickness * 1.5f;
+        private const float _maxFontSize = 1.75f;
+        private const float _minFontSize = 0.3f;
+        public static float FontSize = 1.75f;
 
-        handleSizeY = pinSize;
-    }
+        private const float _maxPinDisplayFontSize = 1.75f;
+        private const float _minPinDisplayFontSize = 0.3f;
+        public static float PinDisplayFontSize = 1.75f;
 
-    public static void UpdateScale()
-    {
-        ChipEditor chipEditor = Manager.ActiveChipEditor;
-        if (chipEditor)
+        private const float _maxPackageFontSize = 2.5f;
+        private const float _minPackageFontSize = 0.5f;
+        public static float PackageFontSize = 2.5f;
+
+        private const float _maxChipInteractionBoundsBorder = 0.25f;
+        private const float _minChipInteractionBoundsBorder = 0.05f;
+        public static float ChipInteractionBoundsBorder = 0.25f;
+
+        private const float _maxChipStackSpace = 0.15f;
+        private const float _minChipStackSpace = 0.05f;
+        public static float ChipStackSpace = 0.15f;
+
+        private const float _maxWireThickness = 0.5f;
+        private const float _minWireThickness = 0.1f;
+        public static float WireThickness = 0.5f;
+        public static float WireSelectedThickness = 0.5f;
+
+        private const float _maxPinDisplayPadding = 0.1f;
+        private const float _minPinDisplayPadding = 0.02f;
+        public static float PinDisplayPadding = 0.1f;
+
+        private const float _maxPinDisplayTextOffset = 0f;
+        private const float _minPinDisplayTextOffset = -0.005f;
+        public static float PinDisplayTextOffset = 0f;
+
+        private const float _maxIOBarDistance = 8.15f;
+        private const float _minIOBarDistance = 7.85f;
+        public static float IoBarDistance = 8.15f;
+
+        private const float _maxIOBarGraphicWidth = 1f;
+        private const float _minIOBarGraphicWidth = 0.5f;
+        public static float IoBarGraphicWidth = 1f;
+
+        private const float _maxGroupSpacing = 0.22f;
+        private const float _minGroupSpacing = 0.055f;
+        public static float GroupSpacing = 0.22f;
+
+        private const float _maxPropertiesUIX = 1.45f;
+        private const float _minPropertiesUIX = 1.1f;
+        public static float PropertiesUIX = 1.45f;
+
+        private const float _maxPropertiesUIXZoom = 0.8f;
+        private const float _minPropertiesUIXZoom = 0;
+        private float _propertiesUIXZoom = 0f;
+
+        void Awake() { Instance = this; }
+
+        void Update()
         {
-            CalcValues();
+            _propertiesUIXZoom = Mathf.Lerp(_minPropertiesUIXZoom, _maxPropertiesUIXZoom,
+                                        ZoomManager.Zoom);
+            PropertiesUIX = Mathf.Lerp(_minPropertiesUIX, _maxPropertiesUIX, Scale) -
+                            _propertiesUIXZoom;
+        }
 
-            chipEditor.UpdateChipSizes();
-            chipEditor.pinNameDisplayManager.UpdateTextSize(pinDisplayFontSize);
-            chipEditor.inputsEditor.UpdateScale();
-            chipEditor.outputsEditor.UpdateScale();
+        private static void CalcValues()
+        {
+            Scale = Mathf.Clamp01(Scale);
 
-            foreach (Chip chip in chipEditor.chipInteraction.allChips)
+            PinSize = Mathf.Lerp(_minPinSize, _maxPinSize, Scale);
+            FontSize = Mathf.Lerp(_minFontSize, _maxFontSize, Scale);
+            ChipInteractionBoundsBorder = Mathf.Lerp(
+                _minChipInteractionBoundsBorder, _maxChipInteractionBoundsBorder, Scale);
+            ChipStackSpace = Mathf.Lerp(_minChipStackSpace, _maxChipStackSpace, Scale);
+            PinDisplayPadding =
+                Mathf.Lerp(_minPinDisplayPadding, _maxPinDisplayPadding, Scale);
+            PinDisplayTextOffset =
+                Mathf.Lerp(_minPinDisplayTextOffset, _maxPinDisplayTextOffset, Scale);
+            IoBarDistance = Mathf.Lerp(_minIOBarDistance, _maxIOBarDistance, Scale);
+            IoBarGraphicWidth =
+                Mathf.Lerp(_minIOBarGraphicWidth, _maxIOBarGraphicWidth, Scale);
+            GroupSpacing = Mathf.Lerp(_minGroupSpacing, _maxGroupSpacing, Scale);
+
+            PinDisplayFontSize =
+                Mathf.Clamp(FontSize, _minPinDisplayFontSize, _maxPinDisplayFontSize);
+            PackageFontSize =
+                Mathf.Clamp(FontSize * 1.5f, _minPackageFontSize, _maxPackageFontSize);
+            WireThickness =
+                Mathf.Clamp(PinSize * 1.5f, _minWireThickness, _maxWireThickness);
+            WireSelectedThickness = WireThickness * 1.5f;
+
+            HandleSizeY = PinSize;
+        }
+
+        public static void UpdateScale()
+        {
+            Graphics.ChipEditor chipEditor = Manager.ActiveChipEditor;
+            if (chipEditor)
             {
-                foreach (Pin pin in chip.inputPins)
+                CalcValues();
+
+                chipEditor.UpdateChipSizes();
+                chipEditor.PinNameDisplayManager.UpdateTextSize(PinDisplayFontSize);
+                chipEditor.InputsEditor.UpdateScale();
+                chipEditor.OutputsEditor.UpdateScale();
+
+                foreach (Chip chip in chipEditor.ChipInteraction.AllChips)
                 {
-                    pin.SetScale();
+                    foreach (Pin pin in chip.InputPins)
+                    {
+                        pin.SetScale();
+                    }
+                    foreach (Pin pin in chip.OutputPins)
+                    {
+                        pin.SetScale();
+                    }
                 }
-                foreach (Pin pin in chip.outputPins)
+                foreach (IOScaler scaler in FindObjectsOfType<IOScaler>())
                 {
-                    pin.SetScale();
+                    scaler.UpdateScale();
                 }
-            }
-            foreach (IOScaler scaler in FindObjectsOfType<IOScaler>())
-            {
-                scaler.UpdateScale();
             }
         }
     }

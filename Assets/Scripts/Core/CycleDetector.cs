@@ -1,60 +1,63 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public static class CycleDetector
+namespace Assets.Scripts.Core
 {
+    using Scripts.Chip;
 
-    static bool currentChipHasCycle;
-
-    public static List<Chip> MarkAllCycles(ChipEditor chipEditor)
+    public static class CycleDetector
     {
-        var chipsWithCycles = new List<Chip>();
+        private static bool _currentChipHasCycle;
 
-        HashSet<Chip> examinedChips = new HashSet<Chip>();
-        Chip[] chips = chipEditor.chipInteraction.allChips.ToArray();
-
-        // Clear all cycle markings
-        foreach (Chip Chip in chips)
-            foreach (Pin pin in Chip.inputPins)
-                pin.cyclic = false;
-
-        // Mark cycles
-        for (int i = 0; i < chips.Length; i++)
+        public static List<Chip> MarkAllCycles(Graphics.ChipEditor chipEditor)
         {
-            examinedChips.Clear();
-            currentChipHasCycle = false;
-            MarkCycles(chips[i], chips[i], examinedChips);
+            var chipsWithCycles = new List<Chip>();
 
-            if (currentChipHasCycle)
-                chipsWithCycles.Add(chips[i]);
-        }
-        return chipsWithCycles;
-    }
+            HashSet<Chip> examinedChips = new HashSet<Chip>();
+            Chip[] chips = chipEditor.ChipInteraction.AllChips.ToArray();
 
-    static void MarkCycles(Chip originalChip, Chip currentChip, HashSet<Chip> examinedChips)
-    {
-        if (examinedChips.Contains(currentChip)) return;
+            // Clear all cycle markings
+            foreach (Chip Chip in chips)
+                foreach (Pin pin in Chip.InputPins)
+                    pin.Cyclic = false;
 
-        examinedChips.Add(currentChip);
-
-        foreach (var outputPin in currentChip.outputPins)
-        {
-            foreach (var childPin in outputPin.childPins)
+            // Mark cycles
+            for (int i = 0; i < chips.Length; i++)
             {
-                var childChip = childPin.chip;
-                if (childChip != null)
+                examinedChips.Clear();
+                _currentChipHasCycle = false;
+                MarkCycles(chips[i], chips[i], examinedChips);
+
+                if (_currentChipHasCycle)
+                    chipsWithCycles.Add(chips[i]);
+            }
+            return chipsWithCycles;
+        }
+
+        private static void MarkCycles(Chip originalChip, Chip currentChip, HashSet<Chip> examinedChips)
+        {
+            if (examinedChips.Contains(currentChip)) return;
+
+            examinedChips.Add(currentChip);
+
+            foreach (var outputPin in currentChip.OutputPins)
+            {
+                foreach (var childPin in outputPin.ChildPins)
                 {
-                    if (childChip == originalChip)
+                    var childChip = childPin.Chip;
+                    if (childChip != null)
                     {
-                        currentChipHasCycle = true;
-                        childPin.cyclic = true;
-                    }
-                    // Don't continue down this path if the pin has already been marked as cyclic
-                    // (doing so would lead to multiple pins along the cycle path being marked, when
-                    // only the first pin responsible for the cycle should be)
-                    else if (!childPin.cyclic)
-                    {
-                        MarkCycles(originalChip, childChip, examinedChips);
+                        if (childChip == originalChip)
+                        {
+                            _currentChipHasCycle = true;
+                            childPin.Cyclic = true;
+                        }
+                        // Don't continue down this path if the pin has already been marked as cyclic
+                        // (doing so would lead to multiple pins along the cycle path being marked, when
+                        // only the first pin responsible for the cycle should be)
+                        else if (!childPin.Cyclic)
+                        {
+                            MarkCycles(originalChip, childChip, examinedChips);
+                        }
                     }
                 }
             }

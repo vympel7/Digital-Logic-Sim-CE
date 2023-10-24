@@ -1,45 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using SFB;
 
-public class ImportExport : MonoBehaviour
+namespace Assets.Scripts.SaveSystem
 {
-    public static ImportExport instance;
-    ChipBarUI chipBar;
+    using Scripts.UI;
 
-    void Awake() { instance = this; }
-
-    void Start() { chipBar = FindObjectOfType<ChipBarUI>(); }
-
-    public void ExportChip(Chip chip)
+    public class ImportExport : MonoBehaviour
     {
-        string path = StandaloneFileBrowser.SaveFilePanel(
-            "Export chip design", "", chip.chipName + ".dls", "dls");
-        if (path.Length != 0)
-            ChipSaver.Export(chip, path);
-    }
+        public static ImportExport Instance;
+        private ChipBarUI _chipBar;
 
-    public void ImportChip()
-    {
-        var extensions = new[] {
-      new ExtensionFilter("Chip design", "dls"),
-    };
+        private void Awake() { Instance = this; }
 
-        StandaloneFileBrowser.OpenFilePanelAsync(
-            "Import chip design", "", extensions, true, (string[] paths) =>
-            {
-                if (paths[0] != null && paths[0] != "")
+        private void Start() { _chipBar = FindObjectOfType<ChipBarUI>(); }
+
+        public void ExportChip(Chip.Chip chip)
+        {
+            string path = StandaloneFileBrowser.SaveFilePanel(
+                "Export chip design", "", chip.ChipName + ".dls", "dls");
+            if (path.Length != 0)
+                ChipSaver.Export(chip, path);
+        }
+
+        public void ImportChip()
+        {
+            var extensions = new[] {
+        new ExtensionFilter("Chip design", "dls"),
+        };
+
+            StandaloneFileBrowser.OpenFilePanelAsync(
+                "Import chip design", "", extensions, true, (string[] paths) =>
                 {
-                    ChipLoader.Import(paths[0]);
-                    EditChipBar();
-                }
-            });
-    }
+                    if (paths[0] != null && paths[0] != "")
+                    {
+                        ChipLoader.Import(paths[0]);
+                        EditChipBar();
+                    }
+                });
+        }
 
-    void EditChipBar()
-    {
-        chipBar.ReloadChipButton();
-        SaveSystem.LoadAllChips(Manager.instance);
+        private void EditChipBar()
+        {
+            _chipBar.ReloadChipButton();
+            SaveSystem.LoadAllChips(Core.Manager.Instance);
+        }
     }
 }

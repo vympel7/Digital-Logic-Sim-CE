@@ -3,85 +3,90 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DecimalDisplay : MonoBehaviour
+namespace Assets.Scripts.UI
 {
+    using Scripts.Chip;
+    using Scripts.Interaction;
 
-    public TMP_Text textPrefab;
-    ChipInterfaceEditor signalEditor;
-
-    List<SignalGroup> displayGroups;
-
-    void Start()
+    public class DecimalDisplay : MonoBehaviour
     {
-        displayGroups = new List<SignalGroup>();
+        public TMP_Text TextPrefab;
+        private ChipInterfaceEditor _signalEditor;
 
-        signalEditor = GetComponent<ChipInterfaceEditor>();
-        signalEditor.OnChipsAddedOrDeleted += RebuildGroups;
-    }
+        private List<SignalGroup> _displayGroups;
 
-    void Update()
-    {
-        UpdateDisplay();
-    }
-
-    void UpdateDisplay()
-    {
-        foreach (SignalGroup signalGroup in displayGroups)
-            signalGroup.UpdateDisplay(signalEditor);
-    }
-
-    void RebuildGroups()
-    {
-        for (int i = 0; i < displayGroups.Count; i++)
+        private void Start()
         {
-            Destroy(displayGroups[i].text.gameObject);
-        }
-        displayGroups.Clear();
+            _displayGroups = new List<SignalGroup>();
 
-        var groups = signalEditor.GetGroups();
-
-        foreach (var group in groups)
-        {
-            if (group[0].displayGroupDecimalValue)
-            {
-                TMP_Text text = Instantiate(textPrefab);
-                text.transform.SetParent(transform, true);
-                displayGroups.Add(new SignalGroup() { signals = group, text = text });
-            }
+            _signalEditor = GetComponent<ChipInterfaceEditor>();
+            _signalEditor.OnChipsAddedOrDeleted += RebuildGroups;
         }
 
-        UpdateDisplay();
-    }
-
-    public class SignalGroup
-    {
-        public ChipSignal[] signals;
-        public TMP_Text text;
-
-        public void UpdateDisplay(ChipInterfaceEditor editor)
+        private void Update()
         {
-            if (editor.selectedSignals.Contains(signals[0]))
+            UpdateDisplay();
+        }
+
+        private void UpdateDisplay()
+        {
+            foreach (SignalGroup signalGroup in _displayGroups)
+                signalGroup.UpdateDisplay(_signalEditor);
+        }
+
+        private void RebuildGroups()
+        {
+            for (int i = 0; i < _displayGroups.Count; i++)
             {
-                text.gameObject.SetActive(false);
+                Destroy(_displayGroups[i].Text.gameObject);
             }
-            else
+            _displayGroups.Clear();
+
+            var groups = _signalEditor.GetGroups();
+
+            foreach (var group in groups)
             {
-                text.gameObject.SetActive(true);
-                float yPos = (signals[0].transform.position.y + signals[signals.Length - 1].transform.position.y) / 2f;
-                text.transform.position = new Vector3(editor.transform.position.x, yPos, -0.5f);
-
-                bool useTwosComplement = signals[0].useTwosComplement;
-
-                int decimalValue = 0;
-                for (int i = 0; i < signals.Length; i++)
+                if (group[0].displayGroupDecimalValue)
                 {
-                    int signalState = signals[signals.Length - 1 - i].currentState;
-                    if (useTwosComplement && i == signals.Length - 1)
-                        decimalValue |= -(signalState << i);
-                    else
-                        decimalValue |= signalState << i;
+                    TMP_Text text = Instantiate(TextPrefab);
+                    text.transform.SetParent(transform, true);
+                    _displayGroups.Add(new SignalGroup() { Signals = group, Text = text });
                 }
-                text.text = decimalValue + "";
+            }
+
+            UpdateDisplay();
+        }
+
+        public class SignalGroup
+        {
+            public ChipSignal[] Signals;
+            public TMP_Text Text;
+
+            public void UpdateDisplay(ChipInterfaceEditor editor)
+            {
+                if (editor.SelectedSignals.Contains(Signals[0]))
+                {
+                    Text.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Text.gameObject.SetActive(true);
+                    float yPos = (Signals[0].transform.position.y + Signals[Signals.Length - 1].transform.position.y) / 2f;
+                    Text.transform.position = new Vector3(editor.transform.position.x, yPos, -0.5f);
+
+                    bool useTwosComplement = Signals[0].useTwosComplement;
+
+                    int decimalValue = 0;
+                    for (int i = 0; i < Signals.Length; i++)
+                    {
+                        int signalState = Signals[Signals.Length - 1 - i].CurrentState;
+                        if (useTwosComplement && i == Signals.Length - 1)
+                            decimalValue |= -(signalState << i);
+                        else
+                            decimalValue |= signalState << i;
+                    }
+                    Text.text = decimalValue + "";
+                }
             }
         }
     }

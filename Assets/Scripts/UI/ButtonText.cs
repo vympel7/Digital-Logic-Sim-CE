@@ -1,58 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace Assets.Scripts.UI
 {
-
-    public Button button;
-    public TMPro.TMP_Text buttonText;
-    public Color normalCol = Color.white;
-    public Color nonInteractableCol = Color.grey;
-    public Color highlightedCol = Color.white;
-    bool highlighted;
-
-    void Start()
+    public class ButtonText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public Button Button;
+        public TMPro.TMP_Text ButtonTxt;
+        public Color NormalCol = Color.white;
+        public Color NonInteractableCol = Color.grey;
+        public Color HighlightedCol = Color.white;
+        private bool _highlighted;
 
-    }
+        private void Start() { }
 
-    void Update()
-    {
-        Color col = (highlighted) ? highlightedCol : normalCol;
-        buttonText.color = (button.interactable) ? col : nonInteractableCol;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (button.interactable)
+        private void Update()
         {
-            highlighted = true;
+            Color col = (_highlighted) ? HighlightedCol : NormalCol;
+            ButtonTxt.color = (Button.interactable) ? col : NonInteractableCol;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (Button.interactable)
+            {
+                _highlighted = true;
+            }
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _highlighted = false;
+        }
+
+        private void OnEnable()
+        {
+            _highlighted = false;
+        }
+
+        private void OnValidate()
+        {
+            if (Button == null)
+            {
+                Button = GetComponent<Button>();
+            }
+            if (ButtonTxt == null)
+            {
+                ButtonTxt = transform.GetComponentInChildren<TMPro.TMP_Text>();
+            }
         }
     }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        highlighted = false;
-    }
-
-    void OnEnable()
-    {
-        highlighted = false;
-    }
-
-    void OnValidate()
-    {
-        if (button == null)
-        {
-            button = GetComponent<Button>();
-        }
-        if (buttonText == null)
-        {
-            buttonText = transform.GetComponentInChildren<TMPro.TMP_Text>();
-        }
-    }
-
 }

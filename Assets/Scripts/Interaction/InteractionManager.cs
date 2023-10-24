@@ -2,58 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractionManager : MonoBehaviour
+namespace Assets.Scripts.Interaction
 {
-    public static InteractionManager Instance;
-
-    private Interactable InteractableWhitFocus;
-
-    private void Awake()
+    public class InteractionManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static InteractionManager Instance;
 
-    private void Update()
-    {
-        if (InteractableWhitFocus == null) return;
+        private Interactable _interactableWhitFocus;
 
-        if (InputHelper.AnyOfTheseKeysDown(KeyCode.Backspace, KeyCode.Delete) || Input.GetMouseButton(2))
-            InteractableWhitFocus.DeleteCommand();
-    }
-
-    public bool HadFocus(Interactable interactable) => InteractableWhitFocus == interactable;
-    public void ReleaseFocus(Interactable interactable)
-    {
-        if (HadFocus(interactable))
+        private void Awake()
         {
-            InteractableWhitFocus.HasFocus = false;
-            InteractableWhitFocus = null;
+            Instance = this;
         }
-    }
 
-    public bool RequestFocus(Interactable interactable)
-    {
-
-        if (InteractableWhitFocus == null)
-            SetInteragibleWhitFocus(interactable);
-        else if (interactable != InteractableWhitFocus)
+        private void Update()
         {
-            if (InteractableWhitFocus.CanReleaseFocus())
+            if (_interactableWhitFocus == null) return;
+
+            if (InputHelper.AnyOfTheseKeysDown(KeyCode.Backspace, KeyCode.Delete) || Input.GetMouseButton(2))
+                _interactableWhitFocus.DeleteCommand();
+        }
+
+        public bool HadFocus(Interactable interactable) => _interactableWhitFocus == interactable;
+        public void ReleaseFocus(Interactable interactable)
+        {
+            if (HadFocus(interactable))
             {
-                InteractableWhitFocus.HasFocus = false;
-                InteractableWhitFocus.FocusLostHandler();
-                SetInteragibleWhitFocus(interactable);
+                _interactableWhitFocus.HasFocus = false;
+                _interactableWhitFocus = null;
             }
-            else
-                return false;
         }
 
-        return true;
-    }
+        public bool RequestFocus(Interactable interactable)
+        {
 
-    private void SetInteragibleWhitFocus(Interactable interactable)
-    {
-        InteractableWhitFocus = interactable;
-        InteractableWhitFocus.HasFocus = true;
+            if (_interactableWhitFocus == null)
+                SetInteragibleWhitFocus(interactable);
+            else if (interactable != _interactableWhitFocus)
+            {
+                if (_interactableWhitFocus.CanReleaseFocus())
+                {
+                    _interactableWhitFocus.HasFocus = false;
+                    _interactableWhitFocus.FocusLostHandler();
+                    SetInteragibleWhitFocus(interactable);
+                }
+                else
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void SetInteragibleWhitFocus(Interactable interactable)
+        {
+            _interactableWhitFocus = interactable;
+            _interactableWhitFocus.HasFocus = true;
+        }
     }
 }

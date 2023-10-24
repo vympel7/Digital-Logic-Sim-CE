@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.XR;
+﻿using System.Linq;
 
 namespace Assets.Scripts.Chip
 {
@@ -17,12 +12,12 @@ namespace Assets.Scripts.Chip
 		protected override void ProcessOutput()
 		{
 			int outputSignal = 0;
-			foreach(var inputState in inputPins.Select(x => x.State))
+			foreach (var inputState in InputPins.Select(x => x.State))
 			{
 				outputSignal <<= 1;
 				outputSignal |= inputState;
 			}
-			outputPins[0].ReceiveSignal(outputSignal);
+			OutputPins[0].ReceiveSignal(outputSignal);
 		}
 	}
 }

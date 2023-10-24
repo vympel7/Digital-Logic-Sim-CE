@@ -1,148 +1,154 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Simulation : MonoBehaviour
+namespace Assets.Scripts.Core
 {
-    public static Simulation instance;
+    using Scripts.Chip;
+    using Scripts.Graphics;
 
-    public static int simulationFrame { get; private set; }
-
-    InputSignal[] inputSignals;
-    ChipEditor chipEditor;
-    public bool active = false;
-
-    public float minStepTime = 0.075f;
-    float lastStepTime;
-
-    List<CustomChip> standaloneChips = new List<CustomChip>();
-
-    public void ToogleActive()
+    public class Simulation : MonoBehaviour
     {
-        // Method called by the "Run/Stop" button that toogles simulation
-        // active/inactive
-        active = !active;
+        public static Simulation Instance;
 
-        simulationFrame++;
-        if (active)
-            ResumeSimulation();
-        else
-            StopSimulation();
+        public static int SimulationFrame { get; private set; }
 
-    }
+        private InputSignal[] _inputSignals;
+        private ChipEditor _chipEditor;
+        public bool Active = false;
 
-    void Awake()
-    {
-        instance = this;
-        simulationFrame = 0;
-    }
+        public float MinStepTime = 0.075f;
+        private float _lastStepTime;
 
-    void Update()
-    {
-        // If simulation is off StepSimulation is not executed.
-        if (Time.time - lastStepTime > minStepTime && active)
+        private List<CustomChip> _standaloneChips = new List<CustomChip>();
+
+        public void ToogleActive()
         {
-            lastStepTime = Time.time;
-            simulationFrame++;
-            StepSimulation();
+            // Method called by the "Run/Stop" button that toogles simulation
+            // active/inactive
+            Active = !Active;
+
+            SimulationFrame++;
+            if (Active)
+                ResumeSimulation();
+            else
+                StopSimulation();
+
         }
-    }
 
-    void StepSimulation()
-    {
-        RefreshChipEditorReference();
-        ClearOutputSignals();
-        InitChips();
-        ProcessInputs();
-    }
-
-    public void ResetSimulation()
-    {
-        StopSimulation();
-        simulationFrame = 0;
-
-        if (active)
+        private void Awake()
         {
-            FindObjectOfType<RunButton>().SetOff();
-            active = false;
+            Instance = this;
+            SimulationFrame = 0;
         }
-    }
 
-    private void ClearOutputSignals()
-    {
-        List<ChipSignal> outputSignals = chipEditor.outputsEditor.signals;
-        for (int i = 0; i < outputSignals.Count; i++)
+        private void Update()
         {
-            outputSignals[i].SetDisplayState(0);
-            outputSignals[i].currentState = 0;
-        }
-    }
-
-    private void ProcessInputs()
-    {
-        List<ChipSignal> inputSignals = chipEditor.inputsEditor.signals;
-        for (int i = 0; i < inputSignals.Count; i++)
-        {
-            ((InputSignal)inputSignals[i]).SendSignal();
-        }
-        foreach (Chip chip in chipEditor.chipInteraction.allChips)
-        {
-            if (chip is CustomChip custom)
+            // If simulation is off StepSimulation is not executed.
+            if (Time.time - _lastStepTime > MinStepTime && Active)
             {
-                // if (custom.HasNoInputs) {
-                // 	custom.ProcessOutputNoInputs();
-                // }
-                custom.pseudoInput?.ReceiveSignal(0);
-                if (custom.pseudoInput != null)
+                _lastStepTime = Time.time;
+                SimulationFrame++;
+                StepSimulation();
+            }
+        }
+
+        private void StepSimulation()
+        {
+            RefreshChipEditorReference();
+            ClearOutputSignals();
+            InitChips();
+            ProcessInputs();
+        }
+
+        public void ResetSimulation()
+        {
+            StopSimulation();
+            SimulationFrame = 0;
+
+            if (Active)
+            {
+                FindObjectOfType<UI.RunButton>().SetOff();
+                Active = false;
+            }
+        }
+
+        private void ClearOutputSignals()
+        {
+            List<ChipSignal> outputSignals = _chipEditor.OutputsEditor.Signals;
+            for (int i = 0; i < outputSignals.Count; i++)
+            {
+                outputSignals[i].SetDisplayState(0);
+                outputSignals[i].CurrentState = 0;
+            }
+        }
+
+        private void ProcessInputs()
+        {
+            List<ChipSignal> inputSignals = _chipEditor.InputsEditor.Signals;
+            for (int i = 0; i < inputSignals.Count; i++)
+            {
+                ((InputSignal)inputSignals[i]).SendSignal();
+            }
+            foreach (Chip chip in _chipEditor.ChipInteraction.AllChips)
+            {
+                if (chip is CustomChip custom)
                 {
+                    // if (custom.HasNoInputs) {
+                    // 	custom.ProcessOutputNoInputs();
+                    // }
+                    custom.pseudoInput?.ReceiveSignal(0);
+                    if (custom.pseudoInput != null)
+                    {
+                    }
                 }
             }
         }
-    }
 
-    void StopSimulation()
-    {
-        RefreshChipEditorReference();
+        private void StopSimulation()
+        {
+            RefreshChipEditorReference();
 
-        var allWires = chipEditor.pinAndWireInteraction.allWires;
-        // Tell all wires the simulation is inactive makes them all inactive (gray
-        // colored)
-        foreach (Wire wire in allWires)
-            wire.tellWireSimIsOff();
-        foreach (Pin pin in chipEditor.pinAndWireInteraction.AllVisiblePins())
-            pin.tellPinSimIsOff();
+            var allWires = _chipEditor.PinAndWireInteraction.allWires;
+            // Tell all wires the simulation is inactive makes them all inactive (gray
+            // colored)
+            foreach (Wire wire in allWires)
+                wire.tellWireSimIsOff();
+            foreach (Pin pin in _chipEditor.PinAndWireInteraction.AllVisiblePins())
+                pin.tellPinSimIsOff();
 
-        // If sim is not active all output signals are set with a temporal value of
-        // 0 (group signed/unsigned displayed value) and get gray colored (turned
-        // off)
-        ClearOutputSignals();
-    }
+            // If sim is not active all output signals are set with a temporal value of
+            // 0 (group signed/unsigned displayed value) and get gray colored (turned
+            // off)
+            ClearOutputSignals();
+        }
 
-    void ResumeSimulation()
-    {
-        StepSimulation();
+        private void ResumeSimulation()
+        {
+            StepSimulation();
 
-        foreach (Pin pin in chipEditor.pinAndWireInteraction.AllVisiblePins())
-            pin.tellPinSimIsOn();
+            foreach (Pin pin in _chipEditor.PinAndWireInteraction.AllVisiblePins())
+                pin.tellPinSimIsOn();
 
-        var allWires = chipEditor.pinAndWireInteraction.allWires;
+            var allWires = _chipEditor.PinAndWireInteraction.allWires;
 
-        // Tell all wires the simulation is active makes them all active (dynamic
-        // colored based on the circuits logic)
-        foreach (Wire wire in allWires)
-            wire.tellWireSimIsOn();
-    }
+            // Tell all wires the simulation is active makes them all active (dynamic
+            // colored based on the circuits logic)
+            foreach (Wire wire in allWires)
+                wire.tellWireSimIsOn();
+        }
 
-    private void InitChips()
-    {
-        var allChips = chipEditor.chipInteraction.allChips;
+        private void InitChips()
+        {
+            var AllChips = _chipEditor.ChipInteraction.AllChips;
 
-        foreach (Chip chip in allChips)
-            chip.InitSimulationFrame();
-    }
+            foreach (Chip chip in AllChips)
+                chip.InitSimulationFrame();
+        }
 
-    void RefreshChipEditorReference()
-    {
-        if (chipEditor == null)
-            chipEditor = Manager.ActiveChipEditor;
+        private void RefreshChipEditorReference()
+        {
+            if (_chipEditor == null)
+                _chipEditor = Manager.ActiveChipEditor;
+        }
     }
 }

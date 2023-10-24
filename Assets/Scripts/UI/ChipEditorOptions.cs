@@ -2,87 +2,93 @@
 using UnityEngine.UI;
 using TMPro;
 
-public class ChipEditorOptions : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public static ChipEditorOptions instance;
+    using Scripts.Core;
+    using Scripts.Graphics;
 
-    public enum PinNameDisplayMode
+    public class ChipEditorOptions : MonoBehaviour
     {
-        AltHover = 0,
-        Hover = 1,
-        AlwaysMain = 2,
-        AlwaysAll = 3
-    }
+        public static ChipEditorOptions Instance;
 
-    public PinNameDisplayMode activePinNameDisplayMode;
-
-    public Slider scaleSlider;
-    public TMP_Text displayPinNamesLabel;
-    public Toggle showZoomHelperToggle;
-    public Slider mouseWheelSensitivitySlider;
-    public Slider camMoveSpeedSlider;
-
-    void Awake() { instance = this; }
-
-    public void SetUIValues(ChipEditor editor)
-    {
-        OnDisplayPinNamesChanged(PlayerPrefs.GetInt("PinNameDisplayMode", 3));
-        showZoomHelperToggle.SetIsOnWithoutNotify(
-            PlayerPrefs.GetInt("ShowZoomHelper", 1) == 1);
-        mouseWheelSensitivitySlider.SetValueWithoutNotify(
-            PlayerPrefs.GetFloat("MouseSensitivity", 0.1f));
-        camMoveSpeedSlider.SetValueWithoutNotify(
-            PlayerPrefs.GetFloat("CamMoveSpeed", 12f));
-        scaleSlider.SetValueWithoutNotify(editor.Data.scale);
-        ScalingManager.UpdateScale();
-    }
-
-    public void OnScaleChanged()
-    {
-        ScalingManager.scale = scaleSlider.value;
-        ScalingManager.UpdateScale();
-    }
-
-    public void OnDisplayPinNamesChanged(int value)
-    {
-        switch (value)
+        public enum PinNameDisplayMode
         {
-            case 0:
-                activePinNameDisplayMode = PinNameDisplayMode.AltHover;
-                displayPinNamesLabel.text = "Alt + Mouse Over";
-                break;
-            case 1:
-                activePinNameDisplayMode = PinNameDisplayMode.Hover;
-                displayPinNamesLabel.text = "Mouse Over";
-                break;
-            case 2:
-                activePinNameDisplayMode = PinNameDisplayMode.AlwaysMain;
-                displayPinNamesLabel.text = "Always Main";
-                break;
-            case 3:
-                activePinNameDisplayMode = PinNameDisplayMode.AlwaysAll;
-                displayPinNamesLabel.text = "Always All";
-                break;
+            AltHover = 0,
+            Hover = 1,
+            AlwaysMain = 2,
+            AlwaysAll = 3
         }
-        PlayerPrefs.SetInt("PinNameDisplayMode", value);
-    }
 
-    public void OnShowZoomHelperChanged()
-    {
-        ZoomManager.instance.showZoomHelper = showZoomHelperToggle.isOn;
-        PlayerPrefs.SetInt("ShowZoomHelper", showZoomHelperToggle.isOn ? 1 : 0);
-    }
+        public PinNameDisplayMode ActivePinNameDisplayMode;
 
-    public void OnMouseWheelSensitivityChanged()
-    {
-        ZoomManager.instance.mouseWheelSensitivity =
-            mouseWheelSensitivitySlider.value;
-        PlayerPrefs.SetFloat("MouseSensitivity", mouseWheelSensitivitySlider.value);
-    }
+        public Slider ScaleSlider;
+        public TMP_Text DisplayPinNamesLabel;
+        public Toggle ShowZoomHelperToggle;
+        public Slider MouseWheelSensitivitySlider;
+        public Slider CamMoveSpeedSlider;
 
-    public void OnCamMoveSpeedChanged()
-    {
-        ZoomManager.instance.camMoveSpeed = camMoveSpeedSlider.value;
-        PlayerPrefs.SetFloat("CamMoveSpeed", camMoveSpeedSlider.value);
+        private void Awake() { Instance = this; }
+
+        public void SetUIValues(ChipEditor editor)
+        {
+            OnDisplayPinNamesChanged(PlayerPrefs.GetInt("PinNameDisplayMode", 3));
+            ShowZoomHelperToggle.SetIsOnWithoutNotify(
+                PlayerPrefs.GetInt("ShowZoomHelper", 1) == 1);
+            MouseWheelSensitivitySlider.SetValueWithoutNotify(
+                PlayerPrefs.GetFloat("MouseSensitivity", 0.1f));
+            CamMoveSpeedSlider.SetValueWithoutNotify(
+                PlayerPrefs.GetFloat("CamMoveSpeed", 12f));
+            ScaleSlider.SetValueWithoutNotify(editor.Data.Scale);
+            ScalingManager.UpdateScale();
+        }
+
+        public void OnScaleChanged()
+        {
+            ScalingManager.Scale = ScaleSlider.value;
+            ScalingManager.UpdateScale();
+        }
+
+        public void OnDisplayPinNamesChanged(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    ActivePinNameDisplayMode = PinNameDisplayMode.AltHover;
+                    DisplayPinNamesLabel.text = "Alt + Mouse Over";
+                    break;
+                case 1:
+                    ActivePinNameDisplayMode = PinNameDisplayMode.Hover;
+                    DisplayPinNamesLabel.text = "Mouse Over";
+                    break;
+                case 2:
+                    ActivePinNameDisplayMode = PinNameDisplayMode.AlwaysMain;
+                    DisplayPinNamesLabel.text = "Always Main";
+                    break;
+                case 3:
+                    ActivePinNameDisplayMode = PinNameDisplayMode.AlwaysAll;
+                    DisplayPinNamesLabel.text = "Always All";
+                    break;
+            }
+            PlayerPrefs.SetInt("PinNameDisplayMode", value);
+        }
+
+        public void OnShowZoomHelperChanged()
+        {
+            ZoomManager.Instance.ShowZoomHelper = ShowZoomHelperToggle.isOn;
+            PlayerPrefs.SetInt("ShowZoomHelper", ShowZoomHelperToggle.isOn ? 1 : 0);
+        }
+
+        public void OnMouseWheelSensitivityChanged()
+        {
+            ZoomManager.Instance.MouseWheelSensitivity =
+                MouseWheelSensitivitySlider.value;
+            PlayerPrefs.SetFloat("MouseSensitivity", MouseWheelSensitivitySlider.value);
+        }
+
+        public void OnCamMoveSpeedChanged()
+        {
+            ZoomManager.Instance.CamMoveSpeed = CamMoveSpeedSlider.value;
+            PlayerPrefs.SetFloat("CamMoveSpeed", CamMoveSpeedSlider.value);
+        }
     }
 }

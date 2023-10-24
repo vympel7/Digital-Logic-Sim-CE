@@ -1,22 +1,23 @@
-using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
-public class SubmitMenu : UIMenu
+namespace Assets.Scripts.UI.Menu
 {
-
-    public TMP_Text headerText;
-    public TMP_Text contentText;
-    public Button submitButton;
-
-    public void SetHeaderText(string text) => headerText.text = text;
-
-    public void SetContentText(string text) => contentText.text = text;
-
-    public void SetOnSubmitAction(UnityAction action)
+    public class SubmitMenu : UIMenu
     {
-        submitButton.onClick.RemoveAllListeners();
-        submitButton.onClick.AddListener(action);
+        public TMP_Text HeaderText;
+        public TMP_Text ContentText;
+        public Button SubmitButton;
+
+        public void SetHeaderText(string text) => HeaderText.text = text;
+
+        public void SetContentText(string text) => ContentText.text = text;
+
+        public void SetOnSubmitAction(UnityAction action)
+        {
+            SubmitButton.onClick.RemoveAllListeners();
+            SubmitButton.onClick.AddListener(action);
+        }
     }
 }

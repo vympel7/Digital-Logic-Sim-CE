@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 using SFB;
 
 [RequireComponent(typeof(Button))]
-public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
+public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler
+{
     public Text output;
 
     // Sample text data
@@ -37,14 +38,17 @@ public class CanvasSampleSaveFileText : MonoBehaviour, IPointerDownHandler {
     public void OnPointerDown(PointerEventData eventData) { }
 
     // Listen OnClick event in standlone builds
-    void Start() {
+    void Start()
+    {
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
 
-    public void OnClick() {
+    public void OnClick()
+    {
         var path = StandaloneFileBrowser.SaveFilePanel("Title", "", "sample", "txt");
-        if (!string.IsNullOrEmpty(path)) {
+        if (!string.IsNullOrEmpty(path))
+        {
             File.WriteAllText(path, _data);
         }
     }

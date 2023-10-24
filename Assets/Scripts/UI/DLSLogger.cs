@@ -1,214 +1,215 @@
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DLSLogger : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public static DLSLogger instance;
-
-    [Header("References")]
-    public Transform loggingMsgsHolder;
-
-    public Button openLogsButton;
-    public TMP_Text logsCounterText;
-
-    public Button showDebugToggle;
-    public Button showWarnToggle;
-    public Button showErrorToggle;
-
-    public LoggingMessage logMsgTemplate;
-
-    public Sprite debugSprite;
-    public Sprite warnSprite;
-    public Sprite errorSprite;
-
-    public Color disabledCol;
-    public Color enabledCol;
-
-    public Color debugCol;
-    public Color errorCol;
-    public Color warnCol;
-
-    static bool showDebug;
-    static bool showWarn;
-    static bool showError;
-
-    public static List<GameObject> allDebugLogs = new List<GameObject>();
-    public static List<GameObject> allWarnLogs = new List<GameObject>();
-    public static List<GameObject> allErrorLogs = new List<GameObject>();
-
-    public static List<GameObject> allLogs = new List<GameObject>();
-
-    static LoggingMessage debugMessageTemplate;
-    static LoggingMessage warningMessageTemplate;
-    static LoggingMessage errorMessageTemplate;
-
-    void OnDestroy()
+    public class DLSLogger : MonoBehaviour
     {
-        allDebugLogs.Clear();
-        allWarnLogs.Clear();
-        allErrorLogs.Clear();
-        allLogs.Clear();
-    }
+        public static DLSLogger Instance;
 
-    void Awake()
-    {
-        instance = this;
-        showDebug = PlayerPrefs.GetInt("LogDebug", 0) == 1;
-        showWarn = PlayerPrefs.GetInt("LogWarning", 1) == 1;
-        showError = PlayerPrefs.GetInt("LogError", 1) == 1;
+        [Header("References")]
+        public Transform LoggingMsgsHolder;
 
-        UpdateOpenLogsButton();
+        public Button OpenLogsButton;
+        public TMP_Text LogsCounterText;
 
-        showDebugToggle.image.color = showDebug ? enabledCol : disabledCol;
-        showWarnToggle.image.color = showWarn ? enabledCol : disabledCol;
-        showErrorToggle.image.color = showError ? enabledCol : disabledCol;
+        public Button ShowDebugToggle;
+        public Button ShowWarnToggle;
+        public Button ShowErrorToggle;
 
-        debugMessageTemplate = Instantiate(logMsgTemplate, transform, false)
-                                   .GetComponent<LoggingMessage>();
-        debugMessageTemplate.gameObject.SetActive(false);
+        public LoggingMessage LogMsgTemplate;
 
-        warningMessageTemplate = Instantiate(logMsgTemplate, transform, false)
-                                     .GetComponent<LoggingMessage>();
-        warningMessageTemplate.iconImage.sprite = warnSprite;
-        warningMessageTemplate.iconImage.color = warnCol;
-        warningMessageTemplate.headerText.color = warnCol;
-        warningMessageTemplate.gameObject.SetActive(false);
+        public Sprite DebugSprite;
+        public Sprite WarnSprite;
+        public Sprite ErrorSprite;
 
-        errorMessageTemplate = Instantiate(logMsgTemplate, transform, false)
-                                   .GetComponent<LoggingMessage>();
-        errorMessageTemplate.iconImage.sprite = errorSprite;
-        errorMessageTemplate.iconImage.color = errorCol;
-        errorMessageTemplate.headerText.color = errorCol;
-        errorMessageTemplate.gameObject.SetActive(false);
-    }
+        public Color DisabledCol;
+        public Color EnabledCol;
 
-    public void ToggleShowDebug()
-    {
-        showDebug = !showDebug;
-        showDebugToggle.image.color = showDebug ? enabledCol : disabledCol;
-        SetActiveAll(showDebug, allDebugLogs);
-        PlayerPrefs.SetInt("LogDebug", showDebug ? 1 : 0);
-        UpdateOpenLogsButton();
-    }
+        public Color DebugCol;
+        public Color ErrorCol;
+        public Color WarnCol;
 
-    public void ToggleShowWarn()
-    {
-        showWarn = !showWarn;
-        showWarnToggle.image.color = showWarn ? enabledCol : disabledCol;
-        SetActiveAll(showWarn, allWarnLogs);
-        PlayerPrefs.SetInt("LogWarning", showWarn ? 1 : 0);
-        UpdateOpenLogsButton();
-    }
+        private static bool _showDebug;
+        private static bool _showWarn;
+        private static bool _showError;
 
-    public void ToggleShowError()
-    {
-        showError = !showError;
-        showErrorToggle.image.color = showError ? enabledCol : disabledCol;
-        SetActiveAll(showError, allErrorLogs);
-        PlayerPrefs.SetInt("LogError", showError ? 1 : 0);
-        UpdateOpenLogsButton();
-    }
+        public static List<GameObject> AllDebugLogs = new List<GameObject>();
+        public static List<GameObject> AllWarnLogs = new List<GameObject>();
+        public static List<GameObject> AllErrorLogs = new List<GameObject>();
 
-    static void SetActiveAll(bool active, List<GameObject> collection)
-    {
-        foreach (GameObject obj in collection)
+        public static List<GameObject> AllLogs = new List<GameObject>();
+
+        private static LoggingMessage _debugMessageTemplate;
+        private static LoggingMessage _warningMessageTemplate;
+        private static LoggingMessage _errorMessageTemplate;
+
+        private void OnDestroy()
         {
-            obj.SetActive(active);
+            AllDebugLogs.Clear();
+            AllWarnLogs.Clear();
+            AllErrorLogs.Clear();
+            AllLogs.Clear();
         }
-    }
 
-    public void ClearLogs()
-    {
-        foreach (GameObject msg in allLogs)
+        private void Awake()
         {
-            GameObject.Destroy(msg);
+            Instance = this;
+            _showDebug = PlayerPrefs.GetInt("LogDebug", 0) == 1;
+            _showWarn = PlayerPrefs.GetInt("LogWarning", 1) == 1;
+            _showError = PlayerPrefs.GetInt("LogError", 1) == 1;
+
+            UpdateOpenLogsButton();
+
+            ShowDebugToggle.image.color = _showDebug ? EnabledCol : DisabledCol;
+            ShowWarnToggle.image.color = _showWarn ? EnabledCol : DisabledCol;
+            ShowErrorToggle.image.color = _showError ? EnabledCol : DisabledCol;
+
+            _debugMessageTemplate = Instantiate(LogMsgTemplate, transform, false)
+                                    .GetComponent<LoggingMessage>();
+            _debugMessageTemplate.gameObject.SetActive(false);
+
+            _warningMessageTemplate = Instantiate(LogMsgTemplate, transform, false)
+                                        .GetComponent<LoggingMessage>();
+            _warningMessageTemplate.IconImage.sprite = WarnSprite;
+            _warningMessageTemplate.IconImage.color = WarnCol;
+            _warningMessageTemplate.HeaderText.color = WarnCol;
+            _warningMessageTemplate.gameObject.SetActive(false);
+
+            _errorMessageTemplate = Instantiate(LogMsgTemplate, transform, false)
+                                    .GetComponent<LoggingMessage>();
+            _errorMessageTemplate.IconImage.sprite = ErrorSprite;
+            _errorMessageTemplate.IconImage.color = ErrorCol;
+            _errorMessageTemplate.HeaderText.color = ErrorCol;
+            _errorMessageTemplate.gameObject.SetActive(false);
         }
-        allDebugLogs.Clear();
-        allWarnLogs.Clear();
-        allErrorLogs.Clear();
-        allLogs.Clear();
 
-        UpdateOpenLogsButton();
-    }
-
-    static GameObject NewLogMessage(LoggingMessage template, string message,
-                                    string details)
-    {
-        bool detailed = !String.IsNullOrEmpty(details);
-        template.headerText.text = message;
-        template.dropDownButon.interactable = detailed;
-        template.contentText.text = detailed ? details : "";
-        GameObject newMessage =
-            Instantiate(template.gameObject, instance.loggingMsgsHolder, false);
-        allLogs.Add(newMessage);
-        return newMessage;
-    }
-
-    static void UpdateOpenLogsButton()
-    {
-        if (showDebug && allWarnLogs.Count == 0 && allErrorLogs.Count == 0)
+        public void ToggleShowDebug()
         {
-            instance.openLogsButton.image.color = instance.debugCol;
-            instance.openLogsButton.image.sprite = instance.debugSprite;
-            instance.logsCounterText.text =
-                allDebugLogs.Count < 100 ? allDebugLogs.Count.ToString() : "99+";
+            _showDebug = !_showDebug;
+            ShowDebugToggle.image.color = _showDebug ? EnabledCol : DisabledCol;
+            SetActiveAll(_showDebug, AllDebugLogs);
+            PlayerPrefs.SetInt("LogDebug", _showDebug ? 1 : 0);
+            UpdateOpenLogsButton();
         }
-        else if (showWarn && allErrorLogs.Count == 0)
-        {
-            instance.openLogsButton.image.color =
-                allWarnLogs.Count > 0 ? instance.warnCol : instance.debugCol;
-            instance.openLogsButton.image.sprite = instance.warnSprite;
-            instance.logsCounterText.text =
-                allWarnLogs.Count < 100 ? allWarnLogs.Count.ToString() : "99+";
-        }
-        else
-        {
-            instance.openLogsButton.image.color =
-                allErrorLogs.Count > 0 ? instance.errorCol : instance.debugCol;
-            instance.openLogsButton.image.sprite = instance.errorSprite;
-            instance.logsCounterText.text =
-                allErrorLogs.Count < 100 ? allErrorLogs.Count.ToString() : "99+";
-        }
-    }
 
-    public static void Log(string message, string details = "")
-    {
-        Debug.Log(!String.IsNullOrEmpty(details) ? message + ": " + details
-                                                 : message);
-        GameObject newMessage =
-            NewLogMessage(debugMessageTemplate, message, details);
-        allDebugLogs.Add(newMessage);
-        newMessage.SetActive(showDebug);
-        UpdateOpenLogsButton();
-    }
+        public void ToggleShowWarn()
+        {
+            _showWarn = !_showWarn;
+            ShowWarnToggle.image.color = _showWarn ? EnabledCol : DisabledCol;
+            SetActiveAll(_showWarn, AllWarnLogs);
+            PlayerPrefs.SetInt("LogWarning", _showWarn ? 1 : 0);
+            UpdateOpenLogsButton();
+        }
 
-    public static void LogWarning(string message, string details = "")
-    {
-        Debug.LogWarning(!String.IsNullOrEmpty(details) ? message + ": " + details
+        public void ToggleShowError()
+        {
+            _showError = !_showError;
+            ShowErrorToggle.image.color = _showError ? EnabledCol : DisabledCol;
+            SetActiveAll(_showError, AllErrorLogs);
+            PlayerPrefs.SetInt("LogError", _showError ? 1 : 0);
+            UpdateOpenLogsButton();
+        }
+
+        private static void SetActiveAll(bool active, List<GameObject> collection)
+        {
+            foreach (GameObject obj in collection)
+            {
+                obj.SetActive(active);
+            }
+        }
+
+        public void ClearLogs()
+        {
+            foreach (GameObject msg in AllLogs)
+            {
+                GameObject.Destroy(msg);
+            }
+            AllDebugLogs.Clear();
+            AllWarnLogs.Clear();
+            AllErrorLogs.Clear();
+            AllLogs.Clear();
+
+            UpdateOpenLogsButton();
+        }
+
+        private static GameObject NewLogMessage(LoggingMessage template, string message, string details)
+        {
+            bool detailed = !String.IsNullOrEmpty(details);
+            template.HeaderText.text = message;
+            template.DropDownButon.interactable = detailed;
+            template.ContentText.text = detailed ? details : "";
+            GameObject newMessage =
+                Instantiate(template.gameObject, Instance.LoggingMsgsHolder, false);
+            AllLogs.Add(newMessage);
+            return newMessage;
+        }
+
+        private static void UpdateOpenLogsButton()
+        {
+            if (_showDebug && AllWarnLogs.Count == 0 && AllErrorLogs.Count == 0)
+            {
+                Instance.OpenLogsButton.image.color = Instance.DebugCol;
+                Instance.OpenLogsButton.image.sprite = Instance.DebugSprite;
+                Instance.LogsCounterText.text =
+                    AllDebugLogs.Count < 100 ? AllDebugLogs.Count.ToString() : "99+";
+            }
+            else if (_showWarn && AllErrorLogs.Count == 0)
+            {
+                Instance.OpenLogsButton.image.color =
+                    AllWarnLogs.Count > 0 ? Instance.WarnCol : Instance.DebugCol;
+                Instance.OpenLogsButton.image.sprite = Instance.WarnSprite;
+                Instance.LogsCounterText.text =
+                    AllWarnLogs.Count < 100 ? AllWarnLogs.Count.ToString() : "99+";
+            }
+            else
+            {
+                Instance.OpenLogsButton.image.color =
+                    AllErrorLogs.Count > 0 ? Instance.ErrorCol : Instance.DebugCol;
+                Instance.OpenLogsButton.image.sprite = Instance.ErrorSprite;
+                Instance.LogsCounterText.text =
+                    AllErrorLogs.Count < 100 ? AllErrorLogs.Count.ToString() : "99+";
+            }
+        }
+
+        public static void Log(string message, string details = "")
+        {
+            Debug.Log(!String.IsNullOrEmpty(details) ? message + ": " + details
+                                                    : message);
+            GameObject newMessage =
+                NewLogMessage(_debugMessageTemplate, message, details);
+            AllDebugLogs.Add(newMessage);
+            newMessage.SetActive(_showDebug);
+            UpdateOpenLogsButton();
+        }
+
+        public static void LogWarning(string message, string details = "")
+        {
+            Debug.LogWarning(!String.IsNullOrEmpty(details) ? message + ": " + details
+                                                            : message);
+            GameObject newMessage =
+                NewLogMessage(_warningMessageTemplate, message, details);
+            AllWarnLogs.Add(newMessage);
+            newMessage.SetActive(_showWarn);
+            UpdateOpenLogsButton();
+        }
+
+        public static void LogError(string message, string details = "")
+        {
+            Debug.LogError(!String.IsNullOrEmpty(details) ? message + ": " + details
                                                         : message);
-        GameObject newMessage =
-            NewLogMessage(warningMessageTemplate, message, details);
-        allWarnLogs.Add(newMessage);
-        newMessage.SetActive(showWarn);
-        UpdateOpenLogsButton();
-    }
-
-    public static void LogError(string message, string details = "")
-    {
-        Debug.LogError(!String.IsNullOrEmpty(details) ? message + ": " + details
-                                                      : message);
-        GameObject newMessage =
-            NewLogMessage(errorMessageTemplate, message, details);
-        allErrorLogs.Add(newMessage);
-        newMessage.SetActive(showError);
-        UpdateOpenLogsButton();
-        if (showError)
-        {
-            UIManager.instance.OpenMenu(MenuType.LoggingMenu);
+            GameObject newMessage =
+                NewLogMessage(_errorMessageTemplate, message, details);
+            AllErrorLogs.Add(newMessage);
+            newMessage.SetActive(_showError);
+            UpdateOpenLogsButton();
+            if (_showError)
+            {
+                UIManager.Instance.OpenMenu(MenuType.LoggingMenu);
+            }
         }
     }
 }

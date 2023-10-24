@@ -1,95 +1,103 @@
 ﻿using UnityEngine;
 
-public class ChipEditor : MonoBehaviour
+namespace Assets.Scripts.Graphics
 {
-    public Transform chipImplementationHolder;
-    public Transform wireHolder;
+    using Scripts.Chip;
+    using Scripts.Core;
+    using Scripts.Interaction;
+    using Scripts.SaveSystem;
+    using Scripts.SaveSystem.Serializable;
 
-    public ChipInterfaceEditor inputsEditor;
-    public ChipInterfaceEditor outputsEditor;
-    public ChipInteraction chipInteraction;
-    public PinAndWireInteraction pinAndWireInteraction;
-
-    public PinNameDisplayManager pinNameDisplayManager ;
-
-    public ChipData Data;
-
-    void Awake()
+    public class ChipEditor : MonoBehaviour
     {
-        Data = new ChipData()
+        public Transform ChipImplementationHolder;
+        public Transform WireHolder;
+
+        public ChipInterfaceEditor InputsEditor;
+        public ChipInterfaceEditor OutputsEditor;
+        public ChipInteraction ChipInteraction;
+        public PinAndWireInteraction PinAndWireInteraction;
+
+        public UI.PinNameDisplayManager PinNameDisplayManager;
+
+        public ChipData Data;
+
+        private void Awake()
         {
-            FolderIndex = 0,
-            scale = 1
-        };
+            Data = new ChipData()
+            {
+                FolderIndex = 0,
+                Scale = 1
+            };
 
+            PinAndWireInteraction.Init(ChipInteraction, InputsEditor, OutputsEditor);
+            PinAndWireInteraction.onConnectionChanged += OnChipNetworkModified;
+            GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        }
 
-        pinAndWireInteraction.Init(chipInteraction, inputsEditor, outputsEditor);
-        pinAndWireInteraction.onConnectionChanged += OnChipNetworkModified;
-        GetComponentInChildren<Canvas>().worldCamera = Camera.main;
-    }
-
-    void LateUpdate()
-    {
-        inputsEditor.OrderedUpdate();
-        outputsEditor.OrderedUpdate();
-        pinAndWireInteraction.OrderedUpdate();
-        chipInteraction.OrderedUpdate();
-    }
-
-    void OnChipNetworkModified() { CycleDetector.MarkAllCycles(this); }
-
-    public void LoadFromSaveData(ChipSaveData saveData)
-    {
-        Data = saveData.Data;
-        ScalingManager.scale = Data.scale;
-
-        // Load component chips
-        foreach (Chip componentChip in saveData.componentChips)
+        private void LateUpdate()
         {
-            if (componentChip is InputSignal inp)
+            InputsEditor.OrderedUpdate();
+            OutputsEditor.OrderedUpdate();
+            PinAndWireInteraction.OrderedUpdate();
+            ChipInteraction.OrderedUpdate();
+        }
+
+        private void OnChipNetworkModified() { CycleDetector.MarkAllCycles(this); }
+
+        public void LoadFromSaveData(ChipSaveData saveData)
+        {
+            Data = saveData.Data;
+            ScalingManager.Scale = Data.Scale;
+
+            // Load component chips
+            foreach (Chip componentChip in saveData.ComponentChips)
             {
-                inp.wireType = inp.outputPins[0].wireType;
-                inputsEditor.LoadSignal(inp);
+                if (componentChip is InputSignal inp)
+                {
+                    inp.wireType = inp.OutputPins[0].WType;
+                    InputsEditor.LoadSignal(inp);
+                }
+                else if (componentChip is OutputSignal outp)
+                {
+                    outp.wireType = outp.InputPins[0].WType;
+                    OutputsEditor.LoadSignal(outp);
+                }
+                else
+                {
+                    ChipInteraction.LoadChip(componentChip);
+                }
             }
-            else if (componentChip is OutputSignal outp)
+
+            // Load wires
+            if (saveData.Wires != null)
             {
-                outp.wireType = outp.inputPins[0].wireType;
-                outputsEditor.LoadSignal(outp);
+                foreach (Wire wire in saveData.Wires)
+                {
+                    PinAndWireInteraction.LoadWire(wire);
+                }
             }
-            else
+
+            UI.ChipEditorOptions.Instance.SetUIValues(this);
+        }
+
+        public void UpdateChipSizes()
+        {
+            foreach (Chip chip in ChipInteraction.AllChips)
             {
-                chipInteraction.LoadChip(componentChip);
+                ChipPackage package = chip.GetComponent<ChipPackage>();
+                if (package)
+                {
+                    package.SetSizeAndSpacing(chip);
+                }
             }
         }
 
-        // Load wires
-        if (saveData.wires != null)
+        private void OnDestroy()
         {
-            foreach (Wire wire in saveData.wires)
-            {
-                pinAndWireInteraction.LoadWire(wire);
-            }
+            ChipInteraction.VisiblePins.Clear();
+            InputsEditor.VisiblePins.Clear();
+            OutputsEditor.VisiblePins.Clear();
         }
-
-        ChipEditorOptions.instance.SetUIValues(this);
-    }
-
-    public void UpdateChipSizes()
-    {
-        foreach (Chip chip in chipInteraction.allChips)
-        {
-            ChipPackage package = chip.GetComponent<ChipPackage>();
-            if (package)
-            {
-                package.SetSizeAndSpacing(chip);
-            }
-        }
-    }
-
-    void OnDestroy()
-    {
-        chipInteraction.visiblePins.Clear();
-        inputsEditor.visiblePins.Clear();
-        outputsEditor.visiblePins.Clear();
     }
 }

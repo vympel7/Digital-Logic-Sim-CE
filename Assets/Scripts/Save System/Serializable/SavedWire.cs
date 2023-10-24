@@ -1,27 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[System.Serializable]
-public class SavedWire
+namespace Assets.Scripts.SaveSystem.Serializable
 {
-    public int parentChipIndex;
-    public int parentChipOutputIndex;
-    public int childChipIndex;
-    public int childChipInputIndex;
-    public Vector2[] anchorPoints;
-
-    public SavedWire(ChipSaveData chipSaveData, Wire wire)
+    [System.Serializable]
+    public class SavedWire
     {
-        Pin parentPin = wire.startPin;
-        Pin childPin = wire.endPin;
+        public int ParentChipIndex;
+        public int ParentChipOutputIndex;
+        public int ChildChipIndex;
+        public int ChildChipInputIndex;
+        public Vector2[] AnchorPoints;
 
-        parentChipIndex = chipSaveData.ComponentChipIndex(parentPin.chip);
-        parentChipOutputIndex = parentPin.index;
+        public SavedWire(ChipSaveData chipSaveData, Graphics.Wire wire)
+        {
+            Chip.Pin parentPin = wire.StartPin;
+            Chip.Pin childPin = wire.EndPin;
 
-        childChipIndex = chipSaveData.ComponentChipIndex(childPin.chip);
-        childChipInputIndex = childPin.index;
+            ParentChipIndex = chipSaveData.ComponentChipIndex(parentPin.Chip);
+            ParentChipOutputIndex = parentPin.Index;
 
-        anchorPoints = wire.anchorPoints.ToArray();
+            ChildChipIndex = chipSaveData.ComponentChipIndex(childPin.Chip);
+            ChildChipInputIndex = childPin.Index;
+
+            AnchorPoints = wire.AnchorPoints.ToArray();
+        }
     }
 }

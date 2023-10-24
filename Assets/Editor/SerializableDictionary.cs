@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
 
-[CustomPropertyDrawer(typeof(MenuDictionary))]
-public class SerializableDictionary : SerializableDictionaryPropertyDrawer
-{
-    
-}
+[CustomPropertyDrawer(typeof(Assets.Scripts.Utility.MenuDictionary))]
+public class SerializableDictionary : SerializableDictionaryPropertyDrawer { }

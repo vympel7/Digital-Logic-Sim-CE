@@ -3,136 +3,139 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CreateMenu : MonoBehaviour
+namespace Assets.Scripts.UI.Menu
 {
+    using Scripts.Core;
 
-    public TMP_InputField chipNameField;
-    public TMP_Dropdown folderDropdown;
-    public Button doneButton;
-    public Slider hueSlider;
-    public Slider saturationSlider;
-    public Slider valueSlider;
-    [Range(0, 1)]
-    public float textColThreshold = 0.5f;
-
-    public Color[] suggestedColours;
-    int suggestedColourIndex;
-
-    string validChars =
-        "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]-";
-
-    List<string> allChipNames = new List<string>();
-
-    void Awake()
+    public class CreateMenu : MonoBehaviour
     {
-        suggestedColourIndex = Random.Range(0, suggestedColours.Length);
-    }
+        public TMP_InputField ChipNameField;
+        public TMP_Dropdown FolderDropdown;
+        public Button DoneButton;
+        public Slider HueSlider;
+        public Slider SaturationSlider;
+        public Slider ValueSlider;
+        [Range(0, 1)]
+        public float TextColThreshold = 0.5f;
 
-    void Update()
-    {
-        if (UIManager.instance.Menus[MenuType.CreateChipMenu].isActive)
+        public Color[] SuggestedColours;
+        private int _suggestedColourIndex;
+
+        private string _validChars =
+            "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]-";
+
+        private List<string> _allChipNames = new List<string>();
+
+        private void Awake()
         {
-            // Force name input field to remain focused
-            if (!chipNameField.isFocused)
+            _suggestedColourIndex = Random.Range(0, SuggestedColours.Length);
+        }
+
+        void Update()
+        {
+            if (UIManager.Instance.Menus[MenuType.CreateChipMenu].IsActive)
             {
-                chipNameField.Select();
-                // Put caret at end of text (instead of selecting the text, which is
-                // annoying in this case)
-                chipNameField.caretPosition = chipNameField.text.Length;
+                // Force name input field to remain focused
+                if (!ChipNameField.isFocused)
+                {
+                    ChipNameField.Select();
+                    // Put caret at end of text (instead of selecting the text, which is
+                    // annoying in this case)
+                    ChipNameField.caretPosition = ChipNameField.text.Length;
+                }
             }
         }
-    }
 
-    public void SelectFolder()
-    {
-        string DropDownTextValue = folderDropdown.options[folderDropdown.value].text;
-        Manager.ActiveChipEditor.Data.FolderIndex = FolderSystem.ReverseIndex(DropDownTextValue);
-    }
-
-    public void ColourSliderChanged()
-    {
-        Color chipCol = Color.HSVToRGB(hueSlider.value, saturationSlider.value,
-                                       valueSlider.value);
-        UpdateColour(chipCol);
-    }
-
-    public void ChipNameFieldChanged(bool endEdit = false)
-    {
-        string text = chipNameField.text.ToUpper();
-        string validName = "";
-        for (int i = 0; i < text.Length; i++)
+        public void SelectFolder()
         {
-            if (i < 12 && validChars.Contains(text[i].ToString()))
+            string DropDownTextValue = FolderDropdown.options[FolderDropdown.value].text;
+            Manager.ActiveChipEditor.Data.FolderIndex = FolderSystem.FolderSystem.ReverseIndex(DropDownTextValue);
+        }
+
+        public void ColourSliderChanged()
+        {
+            Color chipCol = Color.HSVToRGB(HueSlider.value, SaturationSlider.value,
+                                        ValueSlider.value);
+            UpdateColour(chipCol);
+        }
+
+        public void ChipNameFieldChanged(bool endEdit = false)
+        {
+            string text = ChipNameField.text.ToUpper();
+            string validName = "";
+            for (int i = 0; i < text.Length; i++)
             {
-                validName += text[i];
+                if (i < 12 && _validChars.Contains(text[i].ToString()))
+                {
+                    validName += text[i];
+                }
             }
-        }
-        validName = endEdit ? validName.Trim() : validName.TrimStart();
+            validName = endEdit ? validName.Trim() : validName.TrimStart();
 
-        if (IsAvailableName(validName) && validName.Length > 0)
+            if (IsAvailableName(validName) && validName.Length > 0)
+            {
+                Manager.ActiveChipEditor.Data.Name = validName;
+                DoneButton.interactable = true;
+            }
+            else
+            {
+                DoneButton.interactable = false;
+            }
+            ChipNameField.text = validName;
+        }
+
+        private bool IsAvailableName(string chipName)
         {
-            Manager.ActiveChipEditor.Data.name = validName;
-            doneButton.interactable = true;
+            return !_allChipNames.Contains(chipName);
         }
-        else
+
+        public void Prepare()
         {
-            doneButton.interactable = false;
+            _allChipNames = Manager.Instance.AllChipNames();
+            FolderDropdown.ClearOptions();
+            var ddopt = ChipBarUI.Instance.FolderDropdown.options;
+            FolderDropdown.AddOptions(ddopt.GetRange(1, ddopt.Count - 2));
+            DoneButton.interactable = false;
+            ChipNameField.SetTextWithoutNotify("");
+            SetSuggestedColour();
         }
-        chipNameField.text = validName;
-    }
 
-    bool IsAvailableName(string chipName)
-    {
-        return !allChipNames.Contains(chipName);
-    }
+        public void FinishCreation()
+        {
+            Manager.ActiveChipEditor.Data.FolderIndex = FolderSystem.FolderSystem.ReverseIndex(FolderDropdown.options[FolderDropdown.value].text);
+            Manager.ActiveChipEditor.Data.Scale = ScalingManager.Scale;
+            Manager.Instance.SaveAndPackageChip();
+        }
 
-    public void Prepare()
-    {
-        allChipNames = Manager.instance.AllChipNames();
-        folderDropdown.ClearOptions();
-        var ddopt = ChipBarUI.instance.FolderDropdown.options;
-        folderDropdown.AddOptions(ddopt.GetRange(1, ddopt.Count - 2));
-        doneButton.interactable = false;
-        chipNameField.SetTextWithoutNotify("");
-        SetSuggestedColour();
-    }
+        private void SetSuggestedColour()
+        {
+            Color suggestedChipColour = SuggestedColours[_suggestedColourIndex];
+            suggestedChipColour.a = 1;
+            _suggestedColourIndex = (_suggestedColourIndex + 1) % SuggestedColours.Length;
 
-    public void FinishCreation()
-    {
-        Manager.ActiveChipEditor.Data.FolderIndex = FolderSystem.ReverseIndex(folderDropdown.options[folderDropdown.value].text);
-        Manager.ActiveChipEditor.Data.scale = ScalingManager.scale;
-        Manager.instance.SaveAndPackageChip();
-    }
+            float hue, sat, val;
+            Color.RGBToHSV(suggestedChipColour, out hue, out sat, out val);
+            HueSlider.SetValueWithoutNotify(hue);
+            SaturationSlider.SetValueWithoutNotify(sat);
+            ValueSlider.SetValueWithoutNotify(val);
+            UpdateColour(suggestedChipColour);
+        }
 
-    void SetSuggestedColour()
-    {
-        Color suggestedChipColour = suggestedColours[suggestedColourIndex];
-        suggestedChipColour.a = 1;
-        suggestedColourIndex = (suggestedColourIndex + 1) % suggestedColours.Length;
+        private void UpdateColour(Color chipCol)
+        {
+            var cols = ChipNameField.colors;
+            cols.normalColor = chipCol;
+            cols.highlightedColor = chipCol;
+            cols.selectedColor = chipCol;
+            cols.pressedColor = chipCol;
+            ChipNameField.colors = cols;
 
-        float hue, sat, val;
-        Color.RGBToHSV(suggestedChipColour, out hue, out sat, out val);
-        hueSlider.SetValueWithoutNotify(hue);
-        saturationSlider.SetValueWithoutNotify(sat);
-        valueSlider.SetValueWithoutNotify(val);
-        UpdateColour(suggestedChipColour);
-    }
+            float luma = chipCol.r * 0.213f + chipCol.g * 0.715f + chipCol.b * 0.072f;
+            Color chipNameCol = (luma > TextColThreshold) ? Color.black : Color.white;
+            ChipNameField.textComponent.color = chipNameCol;
 
-    void UpdateColour(Color chipCol)
-    {
-        var cols = chipNameField.colors;
-        cols.normalColor = chipCol;
-        cols.highlightedColor = chipCol;
-        cols.selectedColor = chipCol;
-        cols.pressedColor = chipCol;
-        chipNameField.colors = cols;
-
-        float luma = chipCol.r * 0.213f + chipCol.g * 0.715f + chipCol.b * 0.072f;
-        Color chipNameCol = (luma > textColThreshold) ? Color.black : Color.white;
-        chipNameField.textComponent.color = chipNameCol;
-
-        Manager.ActiveChipEditor.Data.Colour = chipCol;
-        Manager.ActiveChipEditor.Data.NameColour = chipNameField.textComponent.color;
+            Manager.ActiveChipEditor.Data.Colour = chipCol;
+            Manager.ActiveChipEditor.Data.NameColour = ChipNameField.textComponent.color;
+        }
     }
 }
-

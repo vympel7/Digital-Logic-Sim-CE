@@ -1,23 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NavBar : MonoBehaviour
+namespace Assets.Scripts.Interaction
 {
-    public GameObject[] tabs;
-    public int activeTab = 0;
+	public class NavBar : MonoBehaviour
+	{
+		public GameObject[] Tabs;
+		public int ActiveTab = 0;
 
-    public void NexTab() {
-      Step(1); 
-    }
+		public void NexTab()
+		{
+			Step(1);
+		}
 
-    public void PrevTab() {
-      Step(-1); 
-    }
+		public void PrevTab()
+		{
+			Step(-1);
+		}
 
-    void Step(int step) {
-      tabs[activeTab].SetActive(false);
-      activeTab = Mathf.Abs((activeTab + step) % tabs.Length);
-      tabs[activeTab].SetActive(true);
-    }
+		private void Step(int step)
+		{
+			Tabs[ActiveTab].SetActive(false);
+			ActiveTab = Mathf.Abs((ActiveTab + step) % Tabs.Length);
+			Tabs[ActiveTab].SetActive(true);
+		}
+	}
 }

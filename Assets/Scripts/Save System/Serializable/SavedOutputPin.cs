@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿namespace Assets.Scripts.SaveSystem.Serializable
+{
+	[System.Serializable]
+	public class SavedOutputPin
+	{
+		public string Name;
+		public Chip.Pin.WireType WireType;
 
-[System.Serializable]
-public class SavedOutputPin {
-	public string name;
-	public Pin.WireType wireType;
-
-	public SavedOutputPin (ChipSaveData chipSaveData, Pin pin) {
-		name = pin.pinName;
-		wireType = pin.wireType;
+		public SavedOutputPin(ChipSaveData chipSaveData, Chip.Pin pin)
+		{
+			Name = pin.PinName;
+			WireType = pin.WType;
+		}
 	}
 }

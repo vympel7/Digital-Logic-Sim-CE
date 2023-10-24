@@ -1,46 +1,41 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using System.Linq;
 
 
-
-[System.Serializable]
-// Composite chip is a custom chip made up from other chips ("components")
-public class SavedChip
+namespace Assets.Scripts.SaveSystem.Serializable
 {
-    public ChipData Data;
-
-    // Names of all chips used as components in this new chip (each name appears
-    // only once)
-    public string[] ChipDependecies;
-    // Data about all the chips used as components in this chip (positions,
-    // connections, etc) Array is ordered: first come input signals, then output
-    // signals, then remaining component chips
-    public SavedComponentChip[] savedComponentChips;
-
-    public SavedChip(ChipSaveData chipSaveData)
+    [System.Serializable]
+    // Composite chip is a custom chip made up from other chips ("components")
+    public class SavedChip
     {
-        Data = chipSaveData.Data;
+        public ChipData Data;
 
-        // Create list of (unique) names of all chips used to make this chip
-        ChipDependecies = chipSaveData.componentChips.Select(x => x.chipName)
-                                .Distinct()
-                                .ToArray();
+        // Names of all chips used as components in this new chip (each name appears
+        // only once)
+        public string[] ChipDependecies;
+        // Data about all the chips used as components in this chip (positions,
+        // connections, etc) Array is ordered: first come input signals, then output
+        // signals, then remaining component chips
+        public SavedComponentChip[] SavedComponentChips;
 
-        // Create serializable chips
-        savedComponentChips = new SavedComponentChip[chipSaveData.componentChips.Length];
+        public SavedChip(ChipSaveData chipSaveData)
+        {
+            Data = chipSaveData.Data;
 
-        for (int i = 0; i < chipSaveData.componentChips.Length; i++)
-            savedComponentChips[i] = new SavedComponentChip(chipSaveData, chipSaveData.componentChips[i]);
+            // Create list of (unique) names of all chips used to make this chip
+            ChipDependecies = chipSaveData.ComponentChips.Select(x => x.ChipName)
+                                    .Distinct()
+                                    .ToArray();
+
+            // Create serializable chips
+            SavedComponentChips = new SavedComponentChip[chipSaveData.ComponentChips.Length];
+
+            for (int i = 0; i < chipSaveData.ComponentChips.Length; i++)
+                SavedComponentChips[i] = new SavedComponentChip(chipSaveData, chipSaveData.ComponentChips[i]);
+        }
+
+        public void ValidateDefaultData()
+        {
+            Data.ValidateDefaultData();
+        }
     }
-
-    public void ValidateDefaultData()
-    {
-
-        Data.ValidateDefaultData();
-    }
-
-
 }

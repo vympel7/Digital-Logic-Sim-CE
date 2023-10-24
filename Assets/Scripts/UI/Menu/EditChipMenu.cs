@@ -1,159 +1,163 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
-using SFB;
 using System.Linq;
 
-public class EditChipMenu : MonoBehaviour
+namespace Assets.Scripts.UI.Menu
 {
-    public TMP_InputField chipNameField;
-    public Button doneButton;
-    public Button deleteButton;
-    public Button viewButton;
-    public Button exportButton;
-    public TMP_Dropdown folderDropdown;
-    private Chip currentChip;
+    using Scripts.Chip;
+    using Scripts.Core;
+    using Scripts.SaveSystem;
+    using Scripts.SaveSystem.Serializable;
 
-    private string nameBeforeChanging;
-
-
-    string CurrentFolderText { get => folderDropdown.options[folderDropdown.value].text; }
-
-    void Awake()
+    public class EditChipMenu : MonoBehaviour
     {
-        chipNameField.onValueChanged.AddListener(ChipNameFieldChanged);
-        doneButton.onClick.AddListener(FinishCreation);
-        deleteButton.onClick.AddListener(SubmitDeleteChip);
-        viewButton.onClick.AddListener(ViewChip);
-        exportButton.onClick.AddListener(ExportChip);
-    }
+        public TMP_InputField ChipNameField;
+        public Button DoneButton;
+        public Button DeleteButton;
+        public Button ViewButton;
+        public Button ExportButton;
+        public TMP_Dropdown FolderDropdown;
 
-    public void EditChipInit(string chipName)
-    {
+        private Chip _currentChip;
+        private string _nameBeforeChanging;
 
-        chipNameField.text = chipName;
-        nameBeforeChanging = chipName;
-        doneButton.interactable = true;
-        var IsSafeToDelate = ChipSaver.IsSafeToDelete(nameBeforeChanging);
-        chipNameField.interactable = IsSafeToDelate;
-        deleteButton.interactable = IsSafeToDelate;
+        private string _currentFolderText { get => FolderDropdown.options[FolderDropdown.value].text; }
 
-        currentChip = Manager.GetChipByName(chipName);
-        viewButton.interactable = true;
-        exportButton.interactable = true;
-
-        folderDropdown.ClearOptions();
-        var FolderOption = ChipBarUI.instance.FolderDropdown.options;
-        folderDropdown.AddOptions(FolderOption.GetRange(1, FolderOption.Count - 2));
-
-
-        if (currentChip is CustomChip customChip)
+        private void Awake()
         {
-            for (int i = 0; i < folderDropdown.options.Count; i++)
-            {
+            ChipNameField.onValueChanged.AddListener(ChipNameFieldChanged);
+            DoneButton.onClick.AddListener(FinishCreation);
+            DeleteButton.onClick.AddListener(SubmitDeleteChip);
+            ViewButton.onClick.AddListener(ViewChip);
+            ExportButton.onClick.AddListener(ExportChip);
+        }
 
-                if (FolderSystem.CompareValue(customChip.FolderIndex, folderDropdown.options[i].text))
+        public void EditChipInit(string chipName)
+        {
+
+            ChipNameField.text = chipName;
+            _nameBeforeChanging = chipName;
+            DoneButton.interactable = true;
+            var IsSafeToDelate = ChipSaver.IsSafeToDelete(_nameBeforeChanging);
+            ChipNameField.interactable = IsSafeToDelate;
+            DeleteButton.interactable = IsSafeToDelate;
+
+            _currentChip = Manager.GetChipByName(chipName);
+            ViewButton.interactable = true;
+            ExportButton.interactable = true;
+
+            FolderDropdown.ClearOptions();
+            var FolderOption = ChipBarUI.Instance.FolderDropdown.options;
+            FolderDropdown.AddOptions(FolderOption.GetRange(1, FolderOption.Count - 2));
+
+
+            if (_currentChip is CustomChip customChip)
+            {
+                for (int i = 0; i < FolderDropdown.options.Count; i++)
                 {
-                    folderDropdown.value = i;
-                    break;
+
+                    if (FolderSystem.FolderSystem.CompareValue(customChip.FolderIndex, FolderDropdown.options[i].text))
+                    {
+                        FolderDropdown.value = i;
+                        break;
+                    }
                 }
             }
         }
 
-    }
-
-    public void ChipNameFieldChanged(string value)
-    {
-        string formattedName = value.ToUpper();
-        doneButton.interactable = IsValidChipName(formattedName.Trim());
-        chipNameField.text = formattedName;
-    }
-
-
-    public bool IsValidRename(string chipName)
-    {
-        // Name has not changed
-        if (string.Equals(nameBeforeChanging, chipName))
-            return true;
-        // Name is either empty or in builtin chips
-        if (!IsValidChipName(chipName))
-            return false;
-
-        SavedChip[] savedChips = SaveSystem.GetAllSavedChips();
-        for (int i = 0; i < savedChips.Length; i++)
+        public void ChipNameFieldChanged(string value)
         {
-            // Name already exists in custom chips
-            if (savedChips[i].Data.name == chipName)
-                return false;
+            string formattedName = value.ToUpper();
+            DoneButton.interactable = IsValidChipName(formattedName.Trim());
+            ChipNameField.text = formattedName;
         }
-        return true;
-    }
-
-    public bool IsValidChipName(string chipName)
-    {
-        // If chipName is not in list of builtin chips then is a valid name
-        return !Manager.instance.AllChipNames(builtin: true, custom: false)
-                    .Contains(chipName) && chipName.Length > 0;
-    }
-
-    public void SubmitDeleteChip()
-    {
-        UIManager.NewSubmitMenu(header: "Delete Chip",
-                                text: $"Are you sure you want to delete the chip '{currentChip.chipName}'? \nIt will be lost forever!",
-                                onSubmit: DeleteChip);
-    }
-
-    public void DeleteChip()
-    {
-        ChipSaver.Delete(nameBeforeChanging);
-        Manager.instance.DeleteChip(nameBeforeChanging);
-        FindObjectOfType<ChipInteraction>().DeleteChip(currentChip);
-
-        ReloadChipBar();
 
 
-        DLSLogger.Log($"Successfully deleted chip '{currentChip.chipName}'");
-        currentChip = null;
-    }
-
-    public void ReloadChipBar()
-    {
-        ChipBarUI.instance.ReloadChipButton();
-    }
-
-    public void FinishCreation()
-    {
-        if (chipNameField.text != nameBeforeChanging)
+        public bool IsValidRename(string chipName)
         {
-            // Chip has been renamed
-            var NameAfterChanging = chipNameField.text.Trim();
-            ChipSaver.Rename(nameBeforeChanging, NameAfterChanging);
-            Manager.instance.RenameChip(nameBeforeChanging, NameAfterChanging);
+            // Name has not changed
+            if (string.Equals(_nameBeforeChanging, chipName))
+                return true;
+            // Name is either empty or in builtin chips
+            if (!IsValidChipName(chipName))
+                return false;
+
+            SavedChip[] savedChips = SaveSystem.GetAllSavedChips();
+            for (int i = 0; i < savedChips.Length; i++)
+            {
+                // Name already exists in custom chips
+                if (savedChips[i].Data.Name == chipName)
+                    return false;
+            }
+            return true;
+        }
+
+        public bool IsValidChipName(string chipName)
+        {
+            // If chipName is not in list of builtin chips then is a valid name
+            return !Manager.Instance.AllChipNames(builtin: true, custom: false)
+                        .Contains(chipName) && chipName.Length > 0;
+        }
+
+        public void SubmitDeleteChip()
+        {
+            UIManager.NewSubmitMenu(header: "Delete Chip",
+                                    text: $"Are you sure you want to delete the chip '{_currentChip.ChipName}'? \nIt will be lost forever!",
+                                    onSubmit: DeleteChip);
+        }
+
+        public void DeleteChip()
+        {
+            ChipSaver.Delete(_nameBeforeChanging);
+            Manager.Instance.DeleteChip(_nameBeforeChanging);
+            FindObjectOfType<Interaction.ChipInteraction>().DeleteChip(_currentChip);
 
             ReloadChipBar();
-        }
-        if (currentChip is CustomChip customChip)
-        {
 
-            var index = FolderSystem.ReverseIndex(CurrentFolderText);
-            if (index != customChip.FolderIndex)
+
+            DLSLogger.Log($"Successfully deleted chip '{_currentChip.ChipName}'");
+            _currentChip = null;
+        }
+
+        public void ReloadChipBar()
+        {
+            ChipBarUI.Instance.ReloadChipButton();
+        }
+
+        public void FinishCreation()
+        {
+            if (ChipNameField.text != _nameBeforeChanging)
             {
-                Manager.instance.ChangeFolderToChip(customChip.name, index);
+                // Chip has been renamed
+                var NameAfterChanging = ChipNameField.text.Trim();
+                ChipSaver.Rename(_nameBeforeChanging, NameAfterChanging);
+                Manager.Instance.RenameChip(_nameBeforeChanging, NameAfterChanging);
+
                 ReloadChipBar();
             }
-        }
-        currentChip = null;
-    }
+            if (_currentChip is CustomChip customChip)
+            {
 
-    public void ViewChip()
-    {
-        if (currentChip != null)
+                var index = FolderSystem.FolderSystem.ReverseIndex(_currentFolderText);
+                if (index != customChip.FolderIndex)
+                {
+                    Manager.Instance.ChangeFolderToChip(customChip.name, index);
+                    ReloadChipBar();
+                }
+            }
+            _currentChip = null;
+        }
+
+        public void ViewChip()
         {
-            Manager.instance.ViewChip(currentChip);
-            currentChip = null;
+            if (_currentChip != null)
+            {
+                Manager.Instance.ViewChip(_currentChip);
+                _currentChip = null;
+            }
         }
-    }
 
-    public void ExportChip() { ImportExport.instance.ExportChip(currentChip); }
+        public void ExportChip() { ImportExport.Instance.ExportChip(_currentChip); }
+    }
 }

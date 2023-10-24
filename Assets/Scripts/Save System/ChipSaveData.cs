@@ -1,41 +1,45 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class ChipSaveData
+namespace Assets.Scripts.SaveSystem
 {
+    using Scripts.Chip;
+    using Scripts.Graphics;
 
-    public ChipData Data;
-
-    // All chips used as components in this new chip (including input and output
-    // signals)
-    public Chip[] componentChips;
-    // All wires in the chip (in case saving of wire layout is desired)
-    public Wire[] wires;
-
-    public ChipSaveData() { }
-
-    public ChipSaveData(ChipEditor chipEditor)
+    public class ChipSaveData
     {
-        List<Chip> componentChipList = new List<Chip>();
+        public Serializable.ChipData Data;
 
-        var sortedInputs = chipEditor.inputsEditor.signals;
-        sortedInputs.Sort(
-            (a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
-        var sortedOutputs = chipEditor.outputsEditor.signals; sortedOutputs.Sort(
-            (a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
+        // All chips used as components in this new chip (including input and output
+        // signals)
+        public Chip[] ComponentChips;
+        // All wires in the chip (in case saving of wire layout is desired)
+        public Wire[] Wires;
 
-        componentChipList.AddRange(sortedInputs);
-        componentChipList.AddRange(sortedOutputs);
+        public ChipSaveData() { }
 
-        componentChipList.AddRange(chipEditor.chipInteraction.allChips);
-        componentChips = componentChipList.ToArray();
+        public ChipSaveData(ChipEditor chipEditor)
+        {
+            List<Chip> componentChipList = new List<Chip>();
 
-        wires = chipEditor.pinAndWireInteraction.allWires.ToArray();
-        Data = chipEditor.Data;
-    }
+            var sortedInputs = chipEditor.InputsEditor.Signals;
+            sortedInputs.Sort(
+                (a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
+            var sortedOutputs = chipEditor.OutputsEditor.Signals; sortedOutputs.Sort(
+                (a, b) => b.transform.position.y.CompareTo(a.transform.position.y));
 
-    public int ComponentChipIndex(Chip componentChip)
-    {
-        return System.Array.IndexOf(componentChips, componentChip);
+            componentChipList.AddRange(sortedInputs);
+            componentChipList.AddRange(sortedOutputs);
+
+            componentChipList.AddRange(chipEditor.ChipInteraction.AllChips);
+            ComponentChips = componentChipList.ToArray();
+
+            Wires = chipEditor.PinAndWireInteraction.allWires.ToArray();
+            Data = chipEditor.Data;
+        }
+
+        public int ComponentChipIndex(Chip componentChip)
+        {
+            return System.Array.IndexOf(ComponentChips, componentChip);
+        }
     }
 }

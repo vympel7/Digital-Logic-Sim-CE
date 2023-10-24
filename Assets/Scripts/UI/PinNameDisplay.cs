@@ -1,40 +1,42 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class PinNameDisplay : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-
-    public TMP_Text nameUI;
-    public Transform background;
-    public Vector2 backgroundPadding;
-
-    public void Set(Pin pin)
+    using Scripts.Core;
+    public class PinNameDisplay : MonoBehaviour
     {
+        public TMP_Text NameUI;
+        public Transform Background;
+        public Vector2 BackgroundPadding;
 
-        nameUI.fontSize = ScalingManager.pinDisplayFontSize;
-
-        if (string.IsNullOrEmpty(pin.pinName))
+        public void Set(Chip.Pin pin)
         {
-            nameUI.text = "UNNAMED PIN";
+            NameUI.fontSize = ScalingManager.PinDisplayFontSize;
+
+            if (string.IsNullOrEmpty(pin.PinName))
+            {
+                NameUI.text = "UNNAMED PIN";
+            }
+            else
+            {
+                NameUI.text = pin.PinName;
+            }
+
+            BackgroundPadding.x = ScalingManager.PinDisplayPadding;
+            NameUI.rectTransform.localPosition =
+                new Vector3(NameUI.rectTransform.localPosition.x,
+                            ScalingManager.PinDisplayTextOffset,
+                            NameUI.rectTransform.localPosition.z);
+
+            float backgroundSizeX = NameUI.preferredWidth + BackgroundPadding.x;
+            float backgroundSizeY = NameUI.preferredHeight + BackgroundPadding.y;
+            Background.localScale = new Vector3(backgroundSizeX, backgroundSizeY, 1);
+
+            float spacingFromPin = (backgroundSizeX / 2 + Chip.Pin.InteractionRadius * 1.5f);
+            spacingFromPin *= (pin.PType == Chip.Pin.PinType.ChipInput) ? -1 : 1;
+            transform.position = pin.transform.position +
+                                Vector3.right * spacingFromPin + Vector3.forward * -1;
         }
-        else
-        {
-            nameUI.text = pin.pinName;
-        }
-
-        backgroundPadding.x = ScalingManager.pinDisplayPadding;
-        nameUI.rectTransform.localPosition =
-            new Vector3(nameUI.rectTransform.localPosition.x,
-                        ScalingManager.pinDisplayTextOffset,
-                        nameUI.rectTransform.localPosition.z);
-
-        float backgroundSizeX = nameUI.preferredWidth + backgroundPadding.x;
-        float backgroundSizeY = nameUI.preferredHeight + backgroundPadding.y;
-        background.localScale = new Vector3(backgroundSizeX, backgroundSizeY, 1);
-
-        float spacingFromPin = (backgroundSizeX / 2 + Pin.interactionRadius * 1.5f);
-        spacingFromPin *= (pin.pinType == Pin.PinType.ChipInput) ? -1 : 1;
-        transform.position = pin.transform.position +
-                             Vector3.right * spacingFromPin + Vector3.forward * -1;
     }
 }

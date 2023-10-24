@@ -2,35 +2,43 @@
 using UnityEngine.UI;
 using SFB;
 
-public class ImportButton : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-    public Button importButton;
-    public Manager manager;
-    public ChipBarUI chipBarUI;
-    void Start()
+    using Scripts.SaveSystem;
+
+    public class ImportButton : MonoBehaviour
     {
-        importButton.onClick.AddListener(ImportChip);
-    }
+        public Button ImpButton;
+        public Core.Manager Manager;
+        public ChipBarUI ChipBarUI;
 
-    void ImportChip() {
-        var extensions = new[] {
-            new ExtensionFilter("Chip design", "dls"),
-        };
+        private void Start()
+        {
+            ImpButton.onClick.AddListener(ImportChip);
+        }
+
+        private void ImportChip()
+        {
+            var extensions = new[] {
+                new ExtensionFilter("Chip design", "dls"),
+            };
 
 
-        StandaloneFileBrowser.OpenFilePanelAsync("Import chip design", "", extensions, true, (string[] paths) => {
-            if (paths[0] != null && paths[0] != "") {
+            StandaloneFileBrowser.OpenFilePanelAsync("Import chip design", "", extensions, true, (string[] paths) =>
+            {
+                if (paths[0] != null && paths[0] != "")
+                {
 
-                ChipLoader.Import(paths[0]);
-                EditChipBar();
-            }
-        });
-        
-    }
+                    ChipLoader.Import(paths[0]);
+                    EditChipBar();
+                }
+            });
+        }
 
-    void EditChipBar()
-    {
-        chipBarUI.ReloadChipButton();
-        SaveSystem.LoadAllChips(manager);
+        private void EditChipBar()
+        {
+            ChipBarUI.ReloadChipButton();
+            SaveSystem.LoadAllChips(Manager);
+        }
     }
 }

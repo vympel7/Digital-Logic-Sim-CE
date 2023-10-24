@@ -1,31 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿namespace Assets.Scripts.SaveSystem.Serializable
+{
+	[System.Serializable]
+	public class SavedComponentChip
+	{
+		public string ChipName;
+		public float PosX;
+		public float PosY;
 
-[System.Serializable]
-public class SavedComponentChip {
-	public string chipName;
-	public float posX;
-	public float posY;
+		public SavedInputPin[] InputPins;
+		public SavedOutputPin[] OutputPins;
 
-	public SavedInputPin[] inputPins;
-	public SavedOutputPin[] outputPins;
+		public SavedComponentChip(ChipSaveData chipSaveData, Chip.Chip chip)
+		{
+			ChipName = chip.ChipName;
 
-	public SavedComponentChip (ChipSaveData chipSaveData, Chip chip) {
-		chipName = chip.chipName;
+			PosX = chip.transform.position.x;
+			PosY = chip.transform.position.y;
 
-        posX = chip.transform.position.x ;
-        posY = chip.transform.position.y ;
+			// Input pins
+			InputPins = new SavedInputPin[chip.InputPins.Length];
+			for (int i = 0; i < InputPins.Length; i++)
+				InputPins[i] = new SavedInputPin(chipSaveData, chip.InputPins[i]);
 
-        // Input pins
-        inputPins = new SavedInputPin[chip.inputPins.Length];
-		for (int i = 0; i < inputPins.Length; i++)
-			inputPins[i] = new SavedInputPin (chipSaveData, chip.inputPins[i]);
+			// Output pins
+			OutputPins = new SavedOutputPin[chip.OutputPins.Length];
+			for (int i = 0; i < chip.OutputPins.Length; i++)
+				OutputPins[i] = new SavedOutputPin(chipSaveData, chip.OutputPins[i]);
+		}
 
-		// Output pins
-		outputPins = new SavedOutputPin[chip.outputPins.Length];
-		for (int i = 0; i < chip.outputPins.Length; i++) 
-			outputPins[i] = new SavedOutputPin(chipSaveData, chip.outputPins[i]);
 	}
-
 }

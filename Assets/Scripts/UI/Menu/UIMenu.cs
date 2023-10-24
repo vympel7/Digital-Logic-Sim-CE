@@ -1,24 +1,26 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UIMenu : MonoBehaviour
+namespace Assets.Scripts.UI.Menu
 {
-    public bool showBG;
-    public MenuType menuType;
-    public UnityEvent onClickBG;
-    [HideInInspector]
-    public bool isActive = false;
-
-    public void Open()
+    public class UIMenu : MonoBehaviour
     {
-        isActive = true;
-        gameObject.SetActive(isActive);
-    }
+        public bool ShowBG;
+        public MenuType MenuType;
+        public UnityEvent OnClickBG;
+        [HideInInspector]
+        public bool IsActive = false;
 
-    public void Close()
-    {
-        isActive = false;
-        gameObject.SetActive(isActive);
-    }
+        public void Open()
+        {
+            IsActive = true;
+            gameObject.SetActive(IsActive);
+        }
 
+        public void Close()
+        {
+            IsActive = false;
+            gameObject.SetActive(IsActive);
+        }
+    }
 }

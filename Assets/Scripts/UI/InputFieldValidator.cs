@@ -1,33 +1,33 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class InputFieldValidator : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-
-    public TMP_InputField inputField;
-    public string validChars = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]<>";
-
-    void Awake()
+    public class InputFieldValidator : MonoBehaviour
     {
-        inputField.onValueChanged.AddListener(OnEdit);
-    }
+        public TMP_InputField InputField;
+        public string ValidChars = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]<>";
 
-    void OnEdit(string newString)
-    {
-        string validString = "";
-        for (int i = 0; i < newString.Length; i++)
-            if (validChars.Contains(newString[i].ToString()))
-                validString += newString[i];
+        private void Awake()
+        {
+            InputField.onValueChanged.AddListener(OnEdit);
+        }
 
+        private void OnEdit(string newString)
+        {
+            string validString = "";
+            for (int i = 0; i < newString.Length; i++)
+                if (ValidChars.Contains(newString[i].ToString()))
+                    validString += newString[i];
 
+            InputField.SetTextWithoutNotify(validString);
+        }
 
-        inputField.SetTextWithoutNotify(validString);
-    }
+        private void OnValidate()
+        {
+            if (InputField == null)
+                InputField = GetComponent<TMP_InputField>();
 
-    void OnValidate()
-    {
-        if (inputField == null)
-            inputField = GetComponent<TMP_InputField>();
-
+        }
     }
 }

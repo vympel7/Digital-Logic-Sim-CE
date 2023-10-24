@@ -1,89 +1,91 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ChipPackageLite : MonoBehaviour
+namespace Assets.Scripts.Graphics
 {
+    using Scripts.Chip;
 
-    public enum ChipType { User, Basic, Advanced }
-    ;
-
-    public ChipType chipType;
-    public Transform container;
-    public Pin chipPinPrefab;
-
-    protected const string pinHolderName = "Pin Holder";
-
-    protected virtual void Awake()
+    public class ChipPackageLite : MonoBehaviour
     {
-        if (chipType != ChipType.User)
+
+        public enum ChipType { User, Basic, Advanced };
+
+        public ChipType Type;
+        public Transform Container;
+        public Pin ChipPinPrefab;
+
+        protected const string _pinHolderName = "Pin Holder";
+
+        protected virtual void Awake()
         {
-            BuiltinChip builtinChip = GetComponent<BuiltinChip>();
-        }
-    }
-
-    public virtual void PackageCustomChip(ChipEditor chipEditor)
-    {
-        gameObject.name = chipEditor.Data.name;
-
-        // Add and set up the custom chip component
-        CustomChip chip = gameObject.AddComponent<CustomChip>();
-        chip.chipName = chipEditor.Data.name;
-        chip.FolderIndex = chipEditor.Data.FolderIndex;
-
-        // Set input signals
-        chip.inputSignals = new InputSignal[chipEditor.inputsEditor.signals.Count];
-        for (int i = 0; i < chip.inputSignals.Length; i++)
-        {
-            chip.inputSignals[i] = (InputSignal)chipEditor.inputsEditor.signals[i];
+            if (Type != ChipType.User)
+            {
+                BuiltinChip builtinChip = GetComponent<BuiltinChip>();
+            }
         }
 
-        // Set output signals
-        chip.outputSignals =
-            new OutputSignal[chipEditor.outputsEditor.signals.Count];
-        for (int i = 0; i < chip.outputSignals.Length; i++)
+        public virtual void PackageCustomChip(ChipEditor chipEditor)
         {
-            chip.outputSignals[i] = (OutputSignal)chipEditor.outputsEditor.signals[i];
+            gameObject.name = chipEditor.Data.Name;
+
+            // Add and set up the custom chip component
+            CustomChip chip = gameObject.AddComponent<CustomChip>();
+            chip.ChipName = chipEditor.Data.Name;
+            chip.FolderIndex = chipEditor.Data.FolderIndex;
+
+            // Set input Signals
+            chip.inputSignals = new InputSignal[chipEditor.InputsEditor.Signals.Count];
+            for (int i = 0; i < chip.inputSignals.Length; i++)
+            {
+                chip.inputSignals[i] = (InputSignal)chipEditor.InputsEditor.Signals[i];
+            }
+
+            // Set output Signals
+            chip.outputSignals =
+                new OutputSignal[chipEditor.OutputsEditor.Signals.Count];
+            for (int i = 0; i < chip.outputSignals.Length; i++)
+            {
+                chip.outputSignals[i] = (OutputSignal)chipEditor.OutputsEditor.Signals[i];
+            }
+
+            // Create pins and set set package size
+            SpawnPins(chip);
+
+            // Parent chip holder to the template, and hide
+            Transform implementationHolder = chipEditor.ChipImplementationHolder;
+
+            implementationHolder.parent = transform;
+            implementationHolder.localPosition = Vector3.zero;
+            implementationHolder.gameObject.SetActive(false);
         }
 
-        // Create pins and set set package size
-        SpawnPins(chip);
-
-        // Parent chip holder to the template, and hide
-        Transform implementationHolder = chipEditor.chipImplementationHolder;
-
-        implementationHolder.parent = transform;
-        implementationHolder.localPosition = Vector3.zero;
-        implementationHolder.gameObject.SetActive(false);
-    }
-
-    public void SpawnPins(CustomChip chip)
-    {
-        Transform pinHolder = new GameObject(pinHolderName).transform;
-        pinHolder.parent = transform;
-        pinHolder.localPosition = Vector3.zero;
-
-        chip.inputPins = new Pin[chip.inputSignals.Length];
-        chip.outputPins = new Pin[chip.outputSignals.Length];
-
-        for (int i = 0; i < chip.inputPins.Length; i++)
+        public void SpawnPins(CustomChip chip)
         {
-            Pin inputPin = Instantiate(chipPinPrefab, pinHolder.position,
-                                       Quaternion.identity, pinHolder);
-            inputPin.pinType = Pin.PinType.ChipInput;
-            inputPin.chip = chip;
-            inputPin.pinName = chip.inputSignals[i].outputPins[0].pinName;
-            chip.inputPins[i] = inputPin;
-        }
+            Transform pinHolder = new GameObject(_pinHolderName).transform;
+            pinHolder.parent = transform;
+            pinHolder.localPosition = Vector3.zero;
 
-        for (int i = 0; i < chip.outputPins.Length; i++)
-        {
-            Pin outputPin = Instantiate(chipPinPrefab, pinHolder.position,
+            chip.InputPins = new Pin[chip.inputSignals.Length];
+            chip.OutputPins = new Pin[chip.outputSignals.Length];
+
+            for (int i = 0; i < chip.InputPins.Length; i++)
+            {
+                Pin inputPin = Instantiate(ChipPinPrefab, pinHolder.position,
                                         Quaternion.identity, pinHolder);
-            outputPin.pinType = Pin.PinType.ChipOutput;
-            outputPin.chip = chip;
-            outputPin.pinName = chip.outputSignals[i].inputPins[0].pinName;
-            chip.outputPins[i] = outputPin;
+                inputPin.PType = Pin.PinType.ChipInput;
+                inputPin.Chip = chip;
+                inputPin.PinName = chip.inputSignals[i].OutputPins[0].PinName;
+                chip.InputPins[i] = inputPin;
+            }
+
+            for (int i = 0; i < chip.OutputPins.Length; i++)
+            {
+                Pin outputPin = Instantiate(ChipPinPrefab, pinHolder.position,
+                                            Quaternion.identity, pinHolder);
+                outputPin.PType = Pin.PinType.ChipOutput;
+                outputPin.Chip = chip;
+                outputPin.PinName = chip.outputSignals[i].InputPins[0].PinName;
+                chip.OutputPins[i] = outputPin;
+            }
         }
     }
 }

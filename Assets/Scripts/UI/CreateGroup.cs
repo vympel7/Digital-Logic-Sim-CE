@@ -1,66 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CreateGroup : MonoBehaviour
+namespace Assets.Scripts.UI
 {
-
-    public event System.Action<int> onGroupSizeSettingPressed;
-
-    public TMP_InputField groupSizeInput;
-    public Button setSizeButton;
-    public GameObject menuHolder;
-    private bool menuActive;
-
-    int groupSizeValue;
-
-    void Start()
+    public class CreateGroup : MonoBehaviour
     {
-        menuActive = false;
-        groupSizeValue = 8;
-        setSizeButton.onClick.AddListener(SetGroupSize);
-        groupSizeInput.onValueChanged.AddListener(SetCurrentText);
-    }
+        public event System.Action<int> OnGroupSizeSettingPressed;
 
-    void SetCurrentText(string groupSize)
-    {
-        if (groupSize != "" && groupSize != "-")
+        public TMP_InputField GroupSizeInput;
+        public Button SetSizeButton;
+        public GameObject MenuHolder;
+        private bool _menuActive;
+
+        private int _groupSizeValue;
+
+        private void Start()
         {
-            int result = int.Parse(groupSize);
-            result = result <= 1 ? 1 : result;
-            groupSizeValue = result > 16 ? 16 : result;
-            groupSizeInput.SetTextWithoutNotify(groupSizeValue.ToString());
+            _menuActive = false;
+            _groupSizeValue = 8;
+            SetSizeButton.onClick.AddListener(SetGroupSize);
+            GroupSizeInput.onValueChanged.AddListener(SetCurrentText);
         }
-        else if (groupSize == "-")
+
+        private void SetCurrentText(string groupSize)
         {
-            groupSizeInput.SetTextWithoutNotify("");
+            if (groupSize != "" && groupSize != "-")
+            {
+                int result = int.Parse(groupSize);
+                result = result <= 1 ? 1 : result;
+                _groupSizeValue = result > 16 ? 16 : result;
+                GroupSizeInput.SetTextWithoutNotify(_groupSizeValue.ToString());
+            }
+            else if (groupSize == "-")
+            {
+                GroupSizeInput.SetTextWithoutNotify("");
+            }
         }
-    }
 
-    public void CloseMenu()
-    {
-        onGroupSizeSettingPressed.Invoke(groupSizeValue);
-        menuActive = false;
-        menuHolder.SetActive(false);
-    }
-
-    public void OpenMenu()
-    {
-        menuActive = true;
-        menuHolder.SetActive(true);
-    }
-
-    void SetGroupSize()
-    {
-        if (menuActive)
+        public void CloseMenu()
         {
-            CloseMenu();
+            OnGroupSizeSettingPressed.Invoke(_groupSizeValue);
+            _menuActive = false;
+            MenuHolder.SetActive(false);
         }
-        else
+
+        public void OpenMenu()
         {
-            OpenMenu();
+            _menuActive = true;
+            MenuHolder.SetActive(true);
+        }
+
+        private void SetGroupSize()
+        {
+            if (_menuActive)
+            {
+                CloseMenu();
+            }
+            else
+            {
+                OpenMenu();
+            }
         }
     }
 }

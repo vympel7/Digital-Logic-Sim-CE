@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu()]
-public class Palette : ScriptableObject {
-  public Color onCol;
-  public Color offCol;
-  public Color highZCol;
-  public Color busColor;
-  public Color selectedColor;
-
-  public Color nonInteractableCol;
+namespace Assets.Scripts.Graphics
+{
+	[CreateAssetMenu()]
+	public class Palette : ScriptableObject
+	{
+		public Color OnCol;
+		public Color OffCol;
+		public Color HighZCol;
+		public Color BusColor;
+		public Color SelectedColor;
+		public Color NonInteractableCol;
+	}
 }
