@@ -79,14 +79,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 1
-  wireType: 0
-  chip: {fileID: 0}
-  pinName: OUT
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 1
+  WType: 0
+  Chip: {fileID: -6260489656382857768}
+  PinName: OUT
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &2166503985383415746
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8496502557923527695}
+  m_Father: {fileID: 7239231081913411360}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -358,6 +358,7 @@ Transform:
   m_Children:
   - {fileID: 8578607437049329950}
   - {fileID: 8496502557923527695}
+  - {fileID: 6752752261016898421}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -373,15 +374,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 506c2406157733f4cb8015ad081ea790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipName: CLOCK
-  inputPins: []
-  outputPins:
+  ChipName: CLOCK
+  InputPins: []
+  OutputPins:
   - {fileID: 5126622102032161408}
-  bounds: {fileID: 0}
-  packageColour: {r: 0.7254902, g: 0.24313727, b: 0.24313727, a: 0}
+  Editable: 0
+  Bounds: {fileID: 0}
+  PackageColour: {r: 0.7254902, g: 0.24313726, b: 0.24313726, a: 0}
   _hz: 1
-  HzThext: {fileID: 197676077477089561}
-  HzEditor: {fileID: 0}
+  _hzText: {fileID: 197676077477089561}
+  _hzEditor: {fileID: 0}
 --- !u!114 &-1534845107842312262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,14 +396,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56121cab9da574d2b97c854754749ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipType: 2
-  nameText: {fileID: 8351000557739538982}
-  container: {fileID: 6886087423236142444}
-  chipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
+  Type: 2
+  NameText: {fileID: 8351000557739538982}
+  Container: {fileID: 6886087423236142444}
+  ChipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
     type: 3}
-  override_width_and_height: 1
-  override_width: 1.2
-  override_height: 1.1
+  OverrideWidthAndHeight: 1
+  OverrideWidth: 1.2
+  OverrideHeight: 1.1
 --- !u!61 &6336459448720122718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -541,7 +543,6 @@ Transform:
   m_Children:
   - {fileID: 6886087423236142444}
   - {fileID: 8351000557739538985}
-  - {fileID: 6752752261016898421}
   m_Father: {fileID: 7239231081913411360}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

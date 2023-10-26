@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.05}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8931610395766659374}
   m_RootOrder: 0
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -109,6 +111,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6470299847229130160}
   m_RootOrder: 0
@@ -132,6 +135,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -191,6 +195,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5833141142837926319}
   - {fileID: 8260901512408478935}
@@ -208,21 +213,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ab54cfd34da341fe8cf2d0420adc299, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  chipName: SIGNAL OUT
-  inputPins:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChipName: SIGNAL OUT
+  InputPins:
   - {fileID: 5081617511579427308}
-  outputPins: []
-  canBeEdited: 0
-  bounds: {fileID: 0}
-  currentState: 0
-  palette: {fileID: 11400000, guid: bed15cc57ce1e4a35bde62f3a99891c7, type: 2}
-  indicatorRenderer: {fileID: 2766455387719651285}
-  pinRenderer: {fileID: 7264883394423657326}
-  wireRenderer: {fileID: 4557980508572362864}
+  OutputPins: []
+  Editable: 0
+  Bounds: {fileID: 0}
+  CurrentState: 0
+  _palette: {fileID: 11400000, guid: bed15cc57ce1e4a35bde62f3a99891c7, type: 2}
+  _indicatorRenderer: {fileID: 2766455387719651285}
+  _pinRenderer: {fileID: 7264883394423657326}
+  _wireRenderer: {fileID: 4557980508572362864}
   wireType: 0
-  signalName:
+  signalName: 
 --- !u!114 &245980143848404051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,8 +238,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ef67dba0f91a4af9afa5d1cd9e77af7, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   mode: 1
   pin: {fileID: 5081617511579427308}
   wire: {fileID: 6470299847229130160}
@@ -281,6 +286,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.05, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4557980508572362866}
   m_Father: {fileID: 8931610395766659374}
@@ -370,13 +376,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
         type: 3}
+      propertyPath: Chip
+      value: 
+      objectReference: {fileID: 894826051406503273}
+    - target: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
+        type: 3}
       propertyPath: chip
-      value:
+      value: 
       objectReference: {fileID: 894826051406503273}
     - target: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
         type: 3}
       propertyPath: pinName
-      value:
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
         type: 3}
@@ -385,12 +396,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f5693e72562648d19f39eace0ccffd6, type: 3}
---- !u!4 &8260901512408478935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5613082965236002813, guid: 3f5693e72562648d19f39eace0ccffd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 4557980509974043434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5081617511579427308 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
@@ -401,11 +406,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &7264883394423657326 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6598688158339663940, guid: 3f5693e72562648d19f39eace0ccffd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 4557980509974043434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8260901512408478935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5613082965236002813, guid: 3f5693e72562648d19f39eace0ccffd6,
     type: 3}
   m_PrefabInstance: {fileID: 4557980509974043434}
   m_PrefabAsset: {fileID: 0}

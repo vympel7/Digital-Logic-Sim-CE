@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -653,16 +653,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5802a06d07f0e4b66a1a047ac1c1202e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetZoom: 0
-  showZoomHelper: 1
-  mouseWheelSensitivity: 0.1
-  mouseWheelDeadzone: 0.01
-  mouseZoomSpeed: 12
-  camMoveSpeed: 12
-  cam: {fileID: 963194227}
-  zoomHelpPanel: {fileID: 451523131}
-  zoomHelpViewport: {fileID: 831611132}
-  zoomHelpCam: {fileID: 1031373173}
+  TargetZoom: 0
+  ShowZoomHelper: 1
+  MouseWheelSensitivity: 0.1
+  MouseWheelDeadzone: 0.01
+  MouseZoomSpeed: 12
+  CamMoveSpeed: 12
+  Ccam: {fileID: 963194227}
+  ZoomHelpPanel: {fileID: 451523131}
+  ZoomHelpViewport: {fileID: 831611132}
+  ZoomHelpCam: {fileID: 1031373173}
 --- !u!1 &51834813
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,26 +783,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5945f6c619d504342bd89c7160b855b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1830893908}
-  bar: {fileID: 1348053200}
-  chipButtonHolderPrefab: {fileID: 6710081469722327129, guid: cd524c225eb684f3cb09a78ad6c9b4b1,
+  Manager: {fileID: 1830893908}
+  Bar: {fileID: 1348053200}
+  ChipButtonHolderPrefab: {fileID: 6710081469722327129, guid: cd524c225eb684f3cb09a78ad6c9b4b1,
     type: 3}
-  buttonPrefab: {fileID: -2340461920023726934, guid: 0b5f6ee9ad6fd4e199ceb4306aa8814e,
+  ButtonPrefab: {fileID: -2340461920023726934, guid: 0b5f6ee9ad6fd4e199ceb4306aa8814e,
     type: 3}
-  buttonSpacing: 5
-  buttonWidthPadding: 15
-  hideList:
+  ButtonSpacing: 5
+  ButtonWidthPadding: 15
+  HideList:
   - SIGNAL IN
   - SIGNAL OUT
-  horizontalScroll: {fileID: 2071599398}
-  scrollRect: {fileID: 756126905}
-  scrollRectViewport: {fileID: 1234171969}
+  HorizontalScroll: {fileID: 2071599398}
+  ScrollRect: {fileID: 756126905}
+  ScrollRectViewport: {fileID: 1234171969}
   FolderDropdown: {fileID: 67770850}
-  Laberl: {fileID: 1574791961}
+  Label: {fileID: 1574791961}
   BuiltInSprite: {fileID: 21300000, guid: dfb74d79fdbe34b8aa11d91618d47724, type: 3}
   UserSprite: {fileID: 21300000, guid: 6132167f492c54ccea9b959782133d50, type: 3}
-  newFolderIcon: {fileID: 21300000, guid: 6b56fb03b2680463fa34f5b81e0d22e0, type: 3}
-  customButton: []
+  NewFolderIcon: {fileID: 21300000, guid: 6b56fb03b2680463fa34f5b81e0d22e0, type: 3}
+  CustomButton: []
 --- !u!1 &66328890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4127,11 +4127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 300415087}
-  buttonText: {fileID: 1538857768}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 300415087}
+  ButtonTxt: {fileID: 1538857768}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &300415087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4912,8 +4912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e99ba9b2db9243099832e99b6380df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 1046492441}
-  subMenus: []
+  Dropdown: {fileID: 1046492441}
+  SubMenus: []
 --- !u!114 &317695807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5198,21 +5198,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3c6c0e632c3465fb577543c693208e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingMsgsHolder: {fileID: 158822527}
-  openLogsButton: {fileID: 786158428}
-  logsCounterText: {fileID: 1923750392}
-  showDebugToggle: {fileID: 892980801}
-  showWarnToggle: {fileID: 1319359516}
-  showErrorToggle: {fileID: 19191274}
-  logMsgTemplate: {fileID: 5462684785358248237}
-  debugSprite: {fileID: 21300000, guid: 499463969e6f14e01ae214e2d2e36c07, type: 3}
-  warnSprite: {fileID: 21300000, guid: d1881d2cb7258483b980442b9ca51496, type: 3}
-  errorSprite: {fileID: 21300000, guid: 20773c15b0ab24bf1a40c0ade528c23d, type: 3}
-  disabledCol: {r: 0.3647059, g: 0.3647059, b: 0.3647059, a: 1}
-  enabledCol: {r: 0.2803489, g: 0.44073558, b: 0.5660378, a: 1}
-  debugCol: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
-  errorCol: {r: 1, g: 0, b: 0, a: 1}
-  warnCol: {r: 1, g: 0.7254902, b: 0, a: 1}
+  LoggingMsgsHolder: {fileID: 158822527}
+  OpenLogsButton: {fileID: 786158428}
+  LogsCounterText: {fileID: 1923750392}
+  ShowDebugToggle: {fileID: 892980801}
+  ShowWarnToggle: {fileID: 1319359516}
+  ShowErrorToggle: {fileID: 19191274}
+  LogMsgTemplate: {fileID: 5462684785358248237}
+  DebugSprite: {fileID: 21300000, guid: 499463969e6f14e01ae214e2d2e36c07, type: 3}
+  WarnSprite: {fileID: 21300000, guid: d1881d2cb7258483b980442b9ca51496, type: 3}
+  ErrorSprite: {fileID: 21300000, guid: 20773c15b0ab24bf1a40c0ade528c23d, type: 3}
+  DisabledCol: {r: 0.3647059, g: 0.3647059, b: 0.3647059, a: 1}
+  EnabledCol: {r: 0.2784314, g: 0.4392157, b: 0.5647059, a: 1}
+  DebugCol: {r: 0.36862746, g: 0.36862746, b: 0.36862746, a: 1}
+  ErrorCol: {r: 1, g: 0, b: 0, a: 1}
+  WarnCol: {r: 1, g: 0.7254902, b: 0, a: 1}
 --- !u!1 &361248248
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,11 +5266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 361248251}
-  buttonText: {fileID: 1278744614}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 361248251}
+  ButtonTxt: {fileID: 1278744614}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &361248251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6270,12 +6270,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb253e85d01749198c21993c7b0ce05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePinNameDisplayMode: 3
-  scaleSlider: {fileID: 1053179701}
-  displayPinNamesLabel: {fileID: 378880880}
-  showZoomHelperToggle: {fileID: 675773001}
-  mouseWheelSensitivitySlider: {fileID: 2112298698}
-  camMoveSpeedSlider: {fileID: 384183581}
+  ActivePinNameDisplayMode: 3
+  ScaleSlider: {fileID: 1053179701}
+  DisplayPinNamesLabel: {fileID: 378880880}
+  ShowZoomHelperToggle: {fileID: 675773001}
+  MouseWheelSensitivitySlider: {fileID: 2112298698}
+  CamMoveSpeedSlider: {fileID: 384183581}
 --- !u!1 &387844910
 GameObject:
   m_ObjectHideFlags: 0
@@ -6778,11 +6778,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 395634965}
-  buttonText: {fileID: 110335801}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 395634965}
+  ButtonTxt: {fileID: 110335801}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &395634965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7224,7 +7224,7 @@ GameObject:
   - component: {fileID: 456197696}
   - component: {fileID: 456197695}
   m_Layer: 5
-  m_Name: Deatails
+  m_Name: Details
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7771,11 +7771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 479317678}
-  buttonText: {fileID: 745566373}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 479317678}
+  ButtonTxt: {fileID: 745566373}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &479317678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9441,13 +9441,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 1
-  onClickBG:
+  ShowBG: 1
+  MenuType: 1
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -9458,7 +9458,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &589468793
 GameObject:
   m_ObjectHideFlags: 0
@@ -10402,11 +10402,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 674862360}
-  buttonText: {fileID: 309201490}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 674862360}
+  ButtonTxt: {fileID: 309201490}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &674862360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11391,12 +11391,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709f2f448ffc545589bed2e816fa6a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipNameField: {fileID: 1661244081}
-  doneButton: {fileID: 1530026660}
-  deleteButton: {fileID: 1424067826}
-  viewButton: {fileID: 1263799671}
-  exportButton: {fileID: 1824830145}
-  folderDropdown: {fileID: 1821210915}
+  ChipNameField: {fileID: 1661244081}
+  DoneButton: {fileID: 1530026660}
+  DeleteButton: {fileID: 1424067826}
+  ViewButton: {fileID: 1263799671}
+  ExportButton: {fileID: 1824830145}
+  FolderDropdown: {fileID: 1821210915}
 --- !u!1 &734147850
 GameObject:
   m_ObjectHideFlags: 0
@@ -13788,11 +13788,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 894584688}
-  buttonText: {fileID: 777427255}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 894584688}
+  ButtonTxt: {fileID: 777427255}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &894584688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14955,8 +14955,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e99ba9b2db9243099832e99b6380df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 1275122197}
-  subMenus: []
+  Dropdown: {fileID: 1275122197}
+  SubMenus: []
 --- !u!1 &944689973
 GameObject:
   m_ObjectHideFlags: 0
@@ -15294,11 +15294,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 957306093}
-  buttonText: {fileID: 900002799}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 957306093}
+  ButtonTxt: {fileID: 900002799}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &957306093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15566,9 +15566,9 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.007607162
+    x: 0.00032874942
     y: 0
-    width: 0.9847857
+    width: 0.9993425
     height: 1
   near clip plane: 0.3
   far clip plane: 1500
@@ -15877,7 +15877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be0f0c955f71101428979fd71d499c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newFolderNameField: {fileID: 556853392}
+  NewFolderNameField: {fileID: 556853392}
   SubmitNewFolder: {fileID: 2000659419}
 --- !u!1 &1003175961
 GameObject:
@@ -16972,13 +16972,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 2
-  onClickBG:
+  ShowBG: 1
+  MenuType: 2
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -16989,7 +16989,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &1073317194
 GameObject:
   m_ObjectHideFlags: 0
@@ -17652,8 +17652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ccc252f57e34603a8c153170222a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
-  minStepTime: 0.075
+  Active: 0
+  MinStepTime: 0.075
 --- !u!4 &1119697276
 Transform:
   m_ObjectHideFlags: 0
@@ -17921,8 +17921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e99ba9b2db9243099832e99b6380df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 963162890}
-  subMenus:
+  Dropdown: {fileID: 963162890}
+  SubMenus:
   - {fileID: 378640003}
 --- !u!114 &1126220856
 MonoBehaviour:
@@ -18184,10 +18184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b58afc021afe4ddc8d344ff3772390b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1138720533}
-  sim: {fileID: 1119697275}
-  onCol: {r: 0.9254902, g: 0.13333334, b: 0.21960784, a: 1}
-  offCol: {r: 0.36078432, g: 0.36078432, b: 0.36078432, a: 1}
+  Button: {fileID: 1138720533}
+  Sim: {fileID: 1119697275}
+  OnCol: {r: 0.9254902, g: 0.13333334, b: 0.21960784, a: 1}
+  OffCol: {r: 0.36078432, g: 0.36078432, b: 0.36078432, a: 1}
 --- !u!1 &1138777292
 GameObject:
   m_ObjectHideFlags: 0
@@ -18318,11 +18318,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1139941189}
-  buttonText: {fileID: 1600128923}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1139941189}
+  ButtonTxt: {fileID: 1600128923}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1139941189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19422,11 +19422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1263799671}
-  buttonText: {fileID: 485885164}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1263799671}
+  ButtonTxt: {fileID: 485885164}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1263799671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19976,13 +19976,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 0
-  onClickBG:
+  ShowBG: 1
+  MenuType: 0
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -19993,7 +19993,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &1278744612
 GameObject:
   m_ObjectHideFlags: 0
@@ -20183,9 +20183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d040201c6f34c72852256b99c6a186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupSizeInput: {fileID: 2051359376}
-  setSizeButton: {fileID: 1287204967}
-  menuHolder: {fileID: 572611655}
+  GroupSizeInput: {fileID: 2051359376}
+  SetSizeButton: {fileID: 1287204967}
+  MenuHolder: {fileID: 572611655}
 --- !u!114 &1287204967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22228,13 +22228,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 5
-  onClickBG:
+  ShowBG: 1
+  MenuType: 5
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -22245,7 +22245,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 1
+  IsActive: 0
 --- !u!1 &1444510469
 GameObject:
   m_ObjectHideFlags: 0
@@ -22625,11 +22625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1530026660}
-  buttonText: {fileID: 1388243046}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1530026660}
+  ButtonTxt: {fileID: 1388243046}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1530026660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23847,13 +23847,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 6
-  onClickBG:
+  ShowBG: 1
+  MenuType: 6
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -23864,7 +23864,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &1579521356
 GameObject:
   m_ObjectHideFlags: 0
@@ -23894,9 +23894,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a857010e9086d1841b614576d53eda2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createButton: {fileID: 894584685}
-  updateButton: {fileID: 1993472433}
-  outsideMenuArea: {fileID: 1275747746}
+  CreateButton: {fileID: 894584685}
+  UpdateButton: {fileID: 1993472433}
+  OutsideMenuArea: {fileID: 1275747746}
   ChipName: {fileID: 1734904546}
   Menus:
     m_keys: 00000000010000000200000003000000040000000500000006000000
@@ -23908,7 +23908,7 @@ MonoBehaviour:
     - {fileID: 1864975376}
     - {fileID: 1425867284}
     - {fileID: 1576721658}
-  palette: {fileID: 11400000, guid: bed15cc57ce1e4a35bde62f3a99891c7, type: 2}
+  Palette: {fileID: 11400000, guid: bed15cc57ce1e4a35bde62f3a99891c7, type: 2}
 --- !u!4 &1579521358
 Transform:
   m_ObjectHideFlags: 0
@@ -26132,24 +26132,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ccca538e6d04deba98ea385ea72cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipNameField: {fileID: 1954538923}
-  folderDropdown: {fileID: 952272677}
-  doneButton: {fileID: 5803949136104292132}
-  hueSlider: {fileID: 2129951107}
-  saturationSlider: {fileID: 1882264447}
-  valueSlider: {fileID: 207296940}
-  textColThreshold: 0.75
-  suggestedColours:
-  - {r: 0.25044498, g: 0.5853932, b: 0.7924528, a: 0}
-  - {r: 0.1990477, g: 0.6698113, b: 0.36648417, a: 0}
-  - {r: 0.56625354, g: 0.7264151, b: 0.28439835, a: 0}
-  - {r: 0.745283, g: 0.5733617, b: 0.10194911, a: 0}
-  - {r: 0.764151, g: 0.40998054, b: 0.19103774, a: 0}
-  - {r: 0.7647059, g: 0.20988317, b: 0.19215685, a: 0}
-  - {r: 0.6792453, g: 0.28515485, b: 0.49732944, a: 0}
-  - {r: 0.6644002, g: 0.22761661, b: 0.8773585, a: 0}
-  - {r: 0.4831562, g: 0.18369527, b: 0.9056604, a: 0}
-  - {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
+  ChipNameField: {fileID: 1954538923}
+  FolderDropdown: {fileID: 952272677}
+  DoneButton: {fileID: 5803949136104292132}
+  HueSlider: {fileID: 2129951107}
+  SaturationSlider: {fileID: 1882264447}
+  ValueSlider: {fileID: 207296940}
+  TextColThreshold: 0.75
+  SuggestedColours:
+  - {r: 0.2509804, g: 0.58431375, b: 0.7921569, a: 0}
+  - {r: 0.2, g: 0.67058825, b: 0.3647059, a: 0}
+  - {r: 0.5647059, g: 0.7254902, b: 0.28627452, a: 0}
+  - {r: 0.74509805, g: 0.57254905, b: 0.101960786, a: 0}
+  - {r: 0.7647059, g: 0.4117647, b: 0.19215687, a: 0}
+  - {r: 0.7647059, g: 0.21176471, b: 0.19215687, a: 0}
+  - {r: 0.6784314, g: 0.28627452, b: 0.49803922, a: 0}
+  - {r: 0.6627451, g: 0.22745098, b: 0.8784314, a: 0}
+  - {r: 0.48235294, g: 0.18431373, b: 0.90588236, a: 0}
+  - {r: 0.14901961, g: 0.14901961, b: 0.14901961, a: 0}
 --- !u!1 &1745414146
 GameObject:
   m_ObjectHideFlags: 0
@@ -26336,13 +26336,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 3
-  onClickBG:
+  ShowBG: 1
+  MenuType: 3
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -26353,7 +26353,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &1765231289
 GameObject:
   m_ObjectHideFlags: 0
@@ -26475,13 +26475,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382875d94cafa4cd99409358f4ab543c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingScreen: {fileID: 1640382676236983760}
-  progressBar: {fileID: 1640382676236983758}
-  fill: {fileID: 1640382676236983761}
-  titleText: {fileID: 1640382676236983759}
-  infoText: {fileID: 1640382676236983757}
-  indicatorText: {fileID: 1640382676236983756}
-  suggestedColours:
+  LoadingScreen: {fileID: 1640382676236983760}
+  ProgBar: {fileID: 1640382676236983758}
+  Fill: {fileID: 1640382676236983761}
+  TitleText: {fileID: 1640382676236983759}
+  InfoText: {fileID: 1640382676236983757}
+  IndicatorText: {fileID: 1640382676236983756}
+  SuggestedColours:
   - {r: 0.2509804, g: 0.58431375, b: 0.7921569, a: 0}
   - {r: 0.2, g: 0.67058825, b: 0.3647059, a: 0}
   - {r: 0.5647059, g: 0.7254902, b: 0.28627452, a: 0}
@@ -27219,11 +27219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1824830145}
-  buttonText: {fileID: 217096557}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1824830145}
+  ButtonTxt: {fileID: 217096557}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1824830145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27349,13 +27349,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd53bcbfcb7694e11b4240fc900e2e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipEditorPrefab: {fileID: 5537867366871689101, guid: d48b4f02647794ac2aba95960c3d59ab,
+  ChipEditorPrefab: {fileID: 3008879100212563311}
+  ChipPackagePrefab: {fileID: 3466065292472579655, guid: e20c939cb564d41189a06c73aa43197e,
     type: 3}
-  chipPackagePrefab: {fileID: 3466065292472579655, guid: e20c939cb564d41189a06c73aa43197e,
+  WirePrefab: {fileID: 761973689955804731, guid: 98fe3bedff56c4adc844cd3884dbdc92,
     type: 3}
-  wirePrefab: {fileID: 761973689955804731, guid: 98fe3bedff56c4adc844cd3884dbdc92,
-    type: 3}
-  builtinChips:
+  BuiltinChips:
   - {fileID: 8869523655109081479, guid: 2296358475ab14fa7a35e4117255096a, type: 3}
   - {fileID: 1267900139923996690, guid: b19a100a3d81b4c6e9a0c3c1362706c3, type: 3}
   - {fileID: 2043041364998414551, guid: 299ea2b174160444f8a6a9065d0f0871, type: 3}
@@ -27400,8 +27399,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707e03c65a80345cf9c9e26633c5010e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vSyncRate: {fileID: 0}
-  FpsTarget: {fileID: 0}
 --- !u!114 &1830893911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27535,8 +27532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1221111fb556af349bae400642f90bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HzInputField: {fileID: 1641263042}
-  doneButton: {fileID: 479317678}
+  _HzInputField: {fileID: 1641263042}
+  DoneButton: {fileID: 479317678}
 --- !u!1 &1854376215
 GameObject:
   m_ObjectHideFlags: 0
@@ -27728,13 +27725,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d88b696531e24332bdc9fcf7422393a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 1
-  menuType: 4
-  onClickBG:
+  ShowBG: 1
+  MenuType: 4
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1579521357}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: Assets.Scripts.UI.UIManager, Assembly-CSharp
         m_MethodName: CloseMenu
         m_Mode: 1
         m_Arguments:
@@ -27745,10 +27742,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
-  headerText: {fileID: 1626551645}
-  contentText: {fileID: 1567061033}
-  submitButton: {fileID: 1273137717}
+  IsActive: 0
+  HeaderText: {fileID: 1626551645}
+  ContentText: {fileID: 1567061033}
+  SubmitButton: {fileID: 1273137717}
 --- !u!1 &1872229255
 GameObject:
   m_ObjectHideFlags: 0
@@ -29819,11 +29816,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1993472436}
-  buttonText: {fileID: 489590765}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1993472436}
+  ButtonTxt: {fileID: 489590765}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1993472436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29971,11 +29968,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1993849528}
-  buttonText: {fileID: 1478963494}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 1993849528}
+  ButtonTxt: {fileID: 1478963494}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1993849528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31247,11 +31244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 2108011027}
-  buttonText: {fileID: 1076481787}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 2108011027}
+  ButtonTxt: {fileID: 1076481787}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2108011027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32720,6 +32717,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48b4f02647794ac2aba95960c3d59ab, type: 3}
+--- !u!114 &3008879100212563311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5537867366871689101, guid: d48b4f02647794ac2aba95960c3d59ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3008879100212563310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a01f8501bfa6f4579a1b0c382a37c841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5462684785358248237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32732,13 +32741,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43c4c0f7763f42f7958a67dab02bb93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconImage: {fileID: 8083522555614934258}
-  headerText: {fileID: 8083522556007772881}
-  contentText: {fileID: 456197695}
-  contentHolder: {fileID: 8083522556475132752}
-  arrowDown: {fileID: 21300000, guid: 14c30e3d7392344f7b630ebfb229e986, type: 3}
-  arrowUp: {fileID: 21300000, guid: 18746d3dedb2c4809be954082a22c39b, type: 3}
-  dropDownButon: {fileID: 1082995218786497500}
+  IconImage: {fileID: 8083522555614934258}
+  HeaderText: {fileID: 8083522556007772881}
+  ContentText: {fileID: 456197695}
+  ContentHolder: {fileID: 8083522556475132752}
+  ArrowDown: {fileID: 21300000, guid: 14c30e3d7392344f7b630ebfb229e986, type: 3}
+  ArrowUp: {fileID: 21300000, guid: 18746d3dedb2c4809be954082a22c39b, type: 3}
+  DropDownButon: {fileID: 1082995218786497500}
 --- !u!114 &5803949136104292132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32860,11 +32869,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fe525ba216b427e97068d69ff70db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 5803949136104292132}
-  buttonText: {fileID: 5803949137104069649}
-  normalCol: {r: 1, g: 1, b: 1, a: 1}
-  nonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
-  highlightedCol: {r: 1, g: 1, b: 1, a: 1}
+  Button: {fileID: 5803949136104292132}
+  ButtonTxt: {fileID: 5803949137104069649}
+  NormalCol: {r: 1, g: 1, b: 1, a: 1}
+  NonInteractableCol: {r: 0.24705882, g: 0.24705882, b: 0.24705882, a: 1}
+  HighlightedCol: {r: 1, g: 1, b: 1, a: 1}
 --- !u!222 &5803949136104292138
 CanvasRenderer:
   m_ObjectHideFlags: 0

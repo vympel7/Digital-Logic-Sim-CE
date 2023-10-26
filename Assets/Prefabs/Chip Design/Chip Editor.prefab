@@ -1360,24 +1360,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28c7b3f46f8d4dba8a7565477f92a0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showBG: 0
-  menuType: 7
-  onClickBG:
+  ShowBG: 0
+  MenuType: -1
+  OnClickBG:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: CloseMenu
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isActive: 0
+  IsActive: 0
 --- !u!1 &3768851718152946936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,16 +1800,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2f6370dd4ea407badc66be4e2226f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipArea: {fileID: 4750937599942274015}
-  chipHolder: {fileID: 4591323741158583362}
-  chipMask:
+  ChipArea: {fileID: 4750937599942274015}
+  ChipHolder: {fileID: 4591323741158583362}
+  ChipMask:
     serializedVersion: 2
     m_Bits: 256
-  selectionBoxMaterial: {fileID: 2100000, guid: 1b2127713af41408e819f9924e7f0b82,
+  SelectionBoxMaterial: {fileID: 2100000, guid: 1b2127713af41408e819f9924e7f0b82,
     type: 2}
-  selectionBoxCol: {r: 1, g: 1, b: 1, a: 0.101960786}
-  invalidPlacementCol: {r: 0.990566, g: 0.35978103, b: 0.35978103, a: 0.29803923}
-  visiblePins: []
+  SelectionBoxCol: {r: 1, g: 1, b: 1, a: 0.101960786}
+  InvalidPlacementCol: {r: 0.99215686, g: 0.36078432, b: 0.36078432, a: 0.29803923}
+  VisiblePins: []
 --- !u!1 &4750937598611645874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,20 +1955,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d9bedf3df7e422eb308f6d36a2c0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorType: 0
-  chipContainer: {fileID: 4750937599942273985}
-  signalPrefab: {fileID: 4370981688201696047, guid: fecc938b0c660450ba39ad175f13ffc0,
+  EditType: 0
+  ChipContainer: {fileID: 4750937599942273985}
+  SignalPrefab: {fileID: 4370981688201696047, guid: fecc938b0c660450ba39ad175f13ffc0,
     type: 3}
   PropertiesMenu: {fileID: 1285768631}
-  signalHolder: {fileID: 4116912237179286911}
-  barGraphic: {fileID: 5233960783680084672}
-  otherEditor: {fileID: 4750937600310344738}
-  handleCol: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
-  highlightedHandleCol: {r: 0.496, g: 0.496, b: 0.496, a: 0}
-  selectedHandleCol: {r: 0.1982467, g: 0.3265027, b: 0.4245283, a: 1}
-  selectedAndFocusedHandleCol: {r: 0.8000001, g: 0.32156864, b: 0.29803923, a: 0}
-  showPreviewSignal: 1
-  visiblePins: []
+  SignalHolder: {fileID: 4116912237179286911}
+  BarGraphic: {fileID: 5233960783680084672}
+  OtherEditor: {fileID: 4750937600310344738}
+  HandleCol: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
+  HighlightedHandleCol: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 0}
+  SelectedHandleCol: {r: 0.2, g: 0.3254902, b: 0.42352942, a: 1}
+  SelectedAndFocusedHandleCol: {r: 0.8, g: 0.32156864, b: 0.29803923, a: 0}
+  ShowPreviewSignal: 1
+  VisiblePins: []
 --- !u!61 &4750937598926047526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d8e53977a5246748d884cfc9bec669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPrefab: {fileID: 6800009612402404466, guid: f52dbf9025a6f4b30a182a0f202170e7,
+  TextPrefab: {fileID: 6800009612402404466, guid: f52dbf9025a6f4b30a182a0f202170e7,
     type: 3}
 --- !u!1 &4750937599625716380
 GameObject:
@@ -2105,20 +2105,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a01f8501bfa6f4579a1b0c382a37c841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipImplementationHolder: {fileID: 4005763214438425974}
-  wireHolder: {fileID: 9038027612668037768}
-  inputsEditor: {fileID: 4750937598926047522}
-  outputsEditor: {fileID: 4750937600310344738}
-  chipInteraction: {fileID: 4750937598426732714}
-  pinAndWireInteraction: {fileID: 4750937600015594407}
-  pinNameDisplayManager: {fileID: 8579933575223702811}
+  ChipImplementationHolder: {fileID: 4005763214438425974}
+  WireHolder: {fileID: 9038027612668037768}
+  InputsEditor: {fileID: 4750937598926047522}
+  OutputsEditor: {fileID: 4750937600310344738}
+  ChipInteraction: {fileID: 4750937598426732714}
+  PinAndWireInteraction: {fileID: 4750937600015594407}
+  PinNameDisplayManager: {fileID: 8579933575223702811}
   Data:
-    name: 
-    creationIndex: 0
+    Name: 
+    CreationIndex: 0
     Colour: {r: 0, g: 0, b: 0, a: 0}
     NameColour: {r: 0, g: 0, b: 0, a: 0}
     FolderIndex: 0
-    scale: 0
+    Scale: 0
 --- !u!1 &4750937599942273984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,10 +2165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3cc8f9adb3a44aab43ac3c03fe47a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thickness: 0.05
-  material: {fileID: 2100000, guid: 60872147ce6c940d6b453ef1281598ee, type: 2}
-  inputSignalArea: {fileID: 4750937598926047525}
-  outputSignalArea: {fileID: 4750937600310344742}
+  Thickness: 0.05
+  Material: {fileID: 2100000, guid: 60872147ce6c940d6b453ef1281598ee, type: 2}
+  InputSignalArea: {fileID: 4750937598926047525}
+  OutputSignalArea: {fileID: 4750937600310344742}
 --- !u!61 &4750937599942274015
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2296,20 +2296,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d9bedf3df7e422eb308f6d36a2c0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  editorType: 1
-  chipContainer: {fileID: 4750937599942273985}
-  signalPrefab: {fileID: 894826051406503273, guid: 808e12d27921848a59bac447b93aec0f,
+  EditType: 1
+  ChipContainer: {fileID: 4750937599942273985}
+  SignalPrefab: {fileID: 894826051406503273, guid: 808e12d27921848a59bac447b93aec0f,
     type: 3}
   PropertiesMenu: {fileID: 1285768631}
-  signalHolder: {fileID: 4830954755177322514}
-  barGraphic: {fileID: 4683701295137199096}
-  otherEditor: {fileID: 4750937598926047522}
-  handleCol: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
-  highlightedHandleCol: {r: 0.496, g: 0.496, b: 0.496, a: 0}
-  selectedHandleCol: {r: 0.1982467, g: 0.3265027, b: 0.4245283, a: 1}
-  selectedAndFocusedHandleCol: {r: 0.8000001, g: 0.32156864, b: 0.29803923, a: 0}
-  showPreviewSignal: 1
-  visiblePins: []
+  SignalHolder: {fileID: 4830954755177322514}
+  BarGraphic: {fileID: 4683701295137199096}
+  OtherEditor: {fileID: 4750937598926047522}
+  HandleCol: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 0}
+  HighlightedHandleCol: {r: 0.49411765, g: 0.49411765, b: 0.49411765, a: 0}
+  SelectedHandleCol: {r: 0.2, g: 0.3254902, b: 0.42352942, a: 1}
+  SelectedAndFocusedHandleCol: {r: 0.8, g: 0.32156864, b: 0.29803923, a: 0}
+  ShowPreviewSignal: 1
+  VisiblePins: []
 --- !u!114 &2647783974511930239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d8e53977a5246748d884cfc9bec669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPrefab: {fileID: 6800009612402404466, guid: f52dbf9025a6f4b30a182a0f202170e7,
+  TextPrefab: {fileID: 6800009612402404466, guid: f52dbf9025a6f4b30a182a0f202170e7,
     type: 3}
 --- !u!61 &4750937600310344741
 BoxCollider2D:
@@ -3047,11 +3047,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   propertiesUI: {fileID: 8506312623313835500}
-  propertiesHeightMinMax: {x: 69, y: 104}
-  nameField: {fileID: 3488882055607390314}
-  deleteButton: {fileID: 3401836960351895843}
-  twosComplementToggle: {fileID: 256749248}
-  modeDropdown: {fileID: 2877500905363170390}
+  PropertiesHeightMinMax: {x: 69, y: 104}
+  NameField: {fileID: 3488882055607390314}
+  DeleteButton: {fileID: 3401836960351895843}
+  TwosComplementToggle: {fileID: 256749248}
+  ModeDropdown: {fileID: 2877500905363170390}
 --- !u!1 &7608708825312222924
 GameObject:
   m_ObjectHideFlags: 0
@@ -3241,8 +3241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4dac9f7803c4e658c584f0517cd8e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputField: {fileID: 3488882055607390314}
-  validChars: abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]
+  InputField: {fileID: 3488882055607390314}
+  ValidChars: abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789()[]
 --- !u!1 &7784399970241149539
 GameObject:
   m_ObjectHideFlags: 0

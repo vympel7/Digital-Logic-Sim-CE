@@ -47,14 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: GREEN 1
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: GREEN 1
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &4996349346288198237
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,14 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: BLUE 1
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: BLUE 1
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &4198220689197935360
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -332,14 +332,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: X 2
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: X 2
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &358154473483555995
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -453,14 +453,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: BLUE 2
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: BLUE 2
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5777354626357960774
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -574,14 +574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: Y 3
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: Y 3
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &7510272332424931163
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -695,14 +695,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: X 1
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: X 1
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &2559282795388841319
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -817,8 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b87881cb47bcb4e8c93bdac1bb2dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipName: DISP8
-  inputPins:
+  ChipName: DISP8
+  InputPins:
   - {fileID: 6457705426190250272}
   - {fileID: 574026286477676863}
   - {fileID: 1326766735082555778}
@@ -831,10 +831,11 @@ MonoBehaviour:
   - {fileID: 2674287585698351816}
   - {fileID: 1296498347741841845}
   - {fileID: 7170950011089252060}
-  outputPins: []
-  bounds: {fileID: 0}
-  packageColour: {r: 0.3207547, g: 0.06505874, b: 0.30556488, a: 0}
-  textureRender: {fileID: 3209717946870843157}
+  OutputPins: []
+  Editable: 0
+  Bounds: {fileID: 0}
+  PackageColour: {r: 0.32156864, g: 0.06666667, b: 0.30588236, a: 0}
+  TextureRender: {fileID: 0}
 --- !u!114 &-1534845107842312262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,14 +848,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56121cab9da574d2b97c854754749ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chipType: 2
-  nameText: {fileID: 8351000557739538982}
-  container: {fileID: 6886087423236142444}
-  chipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
+  Type: 2
+  NameText: {fileID: 8351000557739538982}
+  Container: {fileID: 6886087423236142444}
+  ChipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
     type: 3}
-  override_width_and_height: 1
-  override_width: 3
-  override_height: 3
+  OverrideWidthAndHeight: 1
+  OverrideWidth: 3
+  OverrideHeight: 3
 --- !u!61 &6336459448720122718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -928,14 +929,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: Y 1
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: Y 1
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5542253885030912259
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1049,14 +1050,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: RED 2
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: RED 2
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5787846753239888637
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1170,14 +1171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: GREEN 2
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: GREEN 2
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5964041373193349473
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1291,14 +1292,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: RED 1
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: RED 1
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5855552812320782374
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1412,14 +1413,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: X 3
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: X 3
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &2582979551463750977
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1533,14 +1534,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 286808261455957341}
-  pinName: Y 2
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  PType: 0
+  WType: 0
+  Chip: {fileID: 286808261455957341}
+  PinName: Y 2
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &7877195806427508376
 CircleCollider2D:
   m_ObjectHideFlags: 0

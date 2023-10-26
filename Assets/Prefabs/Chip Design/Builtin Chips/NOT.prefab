@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.4, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3314816954243176949}
   m_RootOrder: 1
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -107,6 +109,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2886115464730570707}
   - {fileID: 322412531872686230}
@@ -143,6 +146,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.3, y: 0, z: -0.05}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3234827502093921508}
   m_RootOrder: 0
@@ -157,16 +161,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  pinType: 0
-  wireType: 0
-  chip: {fileID: 1267900139923996690}
-  pinName: IN
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PType: 0
+  WType: 0
+  Chip: {fileID: 1267900139923996690}
+  PinName: IN
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &768468710238907868
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,6 +206,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -261,6 +266,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3234827502093921508}
   - {fileID: 3314816954243176949}
@@ -277,15 +283,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ce5eea30956940ffb9acd62063235a7, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  chipName: NOT
-  inputPins:
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChipName: NOT
+  InputPins:
   - {fileID: 177712572887147738}
-  outputPins:
+  OutputPins:
   - {fileID: 2075130120421150586}
-  bounds: {fileID: 0}
-  packageColour: {r: 0.54901963, g: 0.16862746, b: 0.14117648, a: 0}
+  Editable: 0
+  Bounds: {fileID: 0}
+  PackageColour: {r: 0.54901963, g: 0.16862746, b: 0.14117648, a: 0}
 --- !u!114 &-7470250890380526709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,16 +303,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56121cab9da574d2b97c854754749ada, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  chipType: 1
-  nameText: {fileID: 2886115464730570716}
-  container: {fileID: 322412531872686230}
-  chipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  NameText: {fileID: 2886115464730570716}
+  Container: {fileID: 322412531872686230}
+  ChipPinPrefab: {fileID: 8774343771143846598, guid: 3f5693e72562648d19f39eace0ccffd6,
     type: 3}
-  override_width_and_height: 0
-  override_width: 1
-  override_height: 1
+  OverrideWidthAndHeight: 0
+  OverrideWidth: 1
+  OverrideHeight: 1
 --- !u!61 &866551715762075300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -360,6 +367,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3314816954243176949}
   m_RootOrder: 0
@@ -380,6 +388,7 @@ MeshRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -420,8 +429,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -496,12 +505,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 2886115464730570718}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 2886115464730570718}
+  m_maskType: 0
 --- !u!1 &8884909147540553020
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +537,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3915399084316275169}
   - {fileID: 1486144487376974427}
@@ -564,6 +574,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.3, y: 0, z: -0.05}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3234827502093921508}
   m_RootOrder: 1
@@ -578,16 +589,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85b497f44243f4a26bbdedfec0c3e09a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  pinType: 1
-  wireType: 0
-  chip: {fileID: 1267900139923996690}
-  pinName: OUT
-  cyclic: 0
-  index: 0
-  parentPin: {fileID: 0}
-  childPins: []
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PType: 1
+  WType: 0
+  Chip: {fileID: 1267900139923996690}
+  PinName: OUT
+  Cyclic: 0
+  Index: 0
+  ParentPin: {fileID: 0}
+  ChildPins: []
 --- !u!58 &5042285142486190648
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -623,6 +634,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
