@@ -112,9 +112,9 @@ namespace Assets.Scripts.Core
             // Tell all wires the simulation is inactive makes them all inactive (gray
             // colored)
             foreach (Wire wire in allWires)
-                wire.tellWireSimIsOff();
+                wire.TellWireSimIsOff();
             foreach (Pin pin in _chipEditor.PinAndWireInteraction.AllVisiblePins())
-                pin.tellPinSimIsOff();
+                pin.TellPinSimIsOff();
 
             // If sim is not active all output signals are set with a temporal value of
             // 0 (group signed/unsigned displayed value) and get gray colored (turned
@@ -127,14 +127,14 @@ namespace Assets.Scripts.Core
             StepSimulation();
 
             foreach (Pin pin in _chipEditor.PinAndWireInteraction.AllVisiblePins())
-                pin.tellPinSimIsOn();
+                pin.TellPinSimIsOn();
 
             var allWires = _chipEditor.PinAndWireInteraction.allWires;
 
             // Tell all wires the simulation is active makes them all active (dynamic
             // colored based on the circuits logic)
             foreach (Wire wire in allWires)
-                wire.tellWireSimIsOn();
+                wire.TellWireSimIsOn();
         }
 
         private void InitChips()

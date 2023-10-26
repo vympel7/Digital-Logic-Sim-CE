@@ -64,13 +64,13 @@ namespace Assets.Scripts.Chip
 
         public void SetScale() { transform.localScale = Vector3.one * Radius * 2; }
 
-        public void tellPinSimIsOff()
+        public void TellPinSimIsOff()
         {
             _simActive = false;
             UpdateColor();
         }
 
-        public void tellPinSimIsOn()
+        public void TellPinSimIsOn()
         {
             _simActive = true;
             UpdateColor();

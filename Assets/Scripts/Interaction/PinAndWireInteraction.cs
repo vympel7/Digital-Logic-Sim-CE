@@ -196,7 +196,6 @@ namespace Assets.Scripts.Interaction
 
         private void TryPlaceWire(Pin StartPin, Pin EndPin)
         {
-
             if (Pin.IsValidConnection(StartPin, EndPin))
             {
                 Pin chipInputPin =

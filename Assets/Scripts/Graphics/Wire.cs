@@ -41,7 +41,7 @@ namespace Assets.Scripts.Graphics
                 ScalingManager.WireSelectedThickness * _thicknessMultiplier;
         }
 
-        void Start()
+        private void Start()
         {
             _palette = UI.UIManager.Instance.Palette;
             LineRenderer.material = SimpleMat;
@@ -52,18 +52,18 @@ namespace Assets.Scripts.Graphics
 
         public Pin ChipOutputPin => (StartPin.PType == Pin.PinType.ChipOutput) ? StartPin : EndPin;
 
-        public void tellWireSimIsOff()
+        public void TellWireSimIsOff()
         {
             SimActive = false;
-            StartPin.tellPinSimIsOff();
-            EndPin.tellPinSimIsOff();
+            StartPin.TellPinSimIsOff();
+            EndPin.TellPinSimIsOff();
         }
 
-        public void tellWireSimIsOn()
+        public void TellWireSimIsOn()
         {
             SimActive = true;
-            StartPin.tellPinSimIsOn();
-            EndPin.tellPinSimIsOn();
+            StartPin.TellPinSimIsOn();
+            EndPin.TellPinSimIsOn();
         }
 
         public void SetAnchorPoints(Vector2[] newAnchorPoints)
@@ -91,12 +91,8 @@ namespace Assets.Scripts.Graphics
                 // transform.position = new Vector3 (transform.position.x,
                 // transform.position.y, inputPin.sequentialState * -0.01f);
             }
-            LineRenderer.startWidth = ((_selected) ? ScalingManager.WireSelectedThickness
-                                                : ScalingManager.WireThickness) *
-                                    _thicknessMultiplier;
-            LineRenderer.endWidth = ((_selected) ? ScalingManager.WireSelectedThickness
-                                                : ScalingManager.WireThickness) *
-                                    _thicknessMultiplier;
+            LineRenderer.startWidth = (_selected ? ScalingManager.WireSelectedThickness : ScalingManager.WireThickness) * _thicknessMultiplier;
+            LineRenderer.endWidth = (_selected ? ScalingManager.WireSelectedThickness : ScalingManager.WireThickness) * _thicknessMultiplier;
         }
 
         private void UpdateWirePos()
@@ -144,7 +140,6 @@ namespace Assets.Scripts.Graphics
                 }
                 else
                 {
-
                     // High Z
                     if (ChipOutputPin.State == -1)
                     {
@@ -259,7 +254,7 @@ namespace Assets.Scripts.Graphics
                 SwapStartEndPoints();
 
             if (Simulation.Instance.Active)
-                tellWireSimIsOn();
+                TellWireSimIsOn();
         }
 
         private void SwapStartEndPoints()
@@ -315,7 +310,7 @@ namespace Assets.Scripts.Graphics
             }
         }
 
-        public void SetSelectionState(bool selected) { this._selected = selected; }
+        public void SetSelectionState(bool selected) { _selected = selected; }
 
         private Vector2 ProcessPoint(Vector2 endPointWorldSpace)
         {
@@ -323,9 +318,8 @@ namespace Assets.Scripts.Graphics
             {
                 Vector2 a = AnchorPoints[AnchorPoints.Count - 2];
                 Vector2 b = endPointWorldSpace;
-                Vector2 mid = (a + b) / 2;
 
-                bool xAxisLonger = (Mathf.Abs(a.x - b.x) > Mathf.Abs(a.y - b.y));
+                bool xAxisLonger = Mathf.Abs(a.x - b.x) > Mathf.Abs(a.y - b.y);
                 if (xAxisLonger)
                 {
                     return new Vector2(b.x, a.y);

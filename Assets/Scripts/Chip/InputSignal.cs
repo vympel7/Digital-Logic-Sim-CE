@@ -42,7 +42,7 @@ namespace Assets.Scripts.Chip
             OutputPins[0].ReceiveSignal(CurrentState);
         }
 
-        void SetCol()
+        private void SetCol()
         {
             SetDisplayState(CurrentState);
         }

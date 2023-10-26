@@ -178,7 +178,6 @@ namespace Assets.Scripts.Interaction
 
         private void HandleSelection()
         {
-
             Vector2 mousePos = InputHelper.MouseWorldPos;
 
             // Left mouse down. Handle selecting a chip, or starting to draw a selection

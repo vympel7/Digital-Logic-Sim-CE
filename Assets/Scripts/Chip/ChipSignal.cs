@@ -8,7 +8,7 @@ namespace Assets.Scripts.Chip
         public int CurrentState;
 
         [SerializeField]
-        private Scripts.Graphics.Palette _palette;
+        private Graphics.Palette _palette;
         [SerializeField]
         private MeshRenderer _indicatorRenderer;
         [SerializeField]
